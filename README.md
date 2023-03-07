@@ -1,6 +1,6 @@
 ### Todo:
 1) [x] Submit steps result
-2) [ ] Update steps list
+2) [x] Update steps list
 3) [x] Loading state
 4) [ ] Widgets
    1) [ ] Information

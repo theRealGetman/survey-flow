@@ -17,8 +17,9 @@ class SurveyFlow extends StatefulWidget {
   final Widget? loadingPlaceholder;
   final Map<String, Function>? actionHandler;
 
-  // if onSubmit returns true - onFinish will be called right after onSubmit is finished
-  final Future<bool> Function(List<StepResult> results)? onSubmit;
+  // if onSubmit returns empty list - onFinish will be called right after onSubmit is finished
+  // else returned steps would be added to the queue
+  final Future<List<SurveyStep>> Function(List<StepResult> results)? onSubmit;
   final VoidCallback onFinish;
 
   @override
@@ -71,26 +72,26 @@ class _SurveyFlowState extends State<SurveyFlow> {
       bool shouldFinish = true;
       // last page, so we need to submit
       if (widget.onSubmit != null) {
-        shouldFinish = await widget.onSubmit!(results);
+        final List<SurveyStep> newSteps = await widget.onSubmit!(results);
+        shouldFinish = newSteps.isEmpty;
+        setState(() {
+          steps.addAll(newSteps);
+        });
       }
       if (shouldFinish) {
         widget.onFinish();
         return;
       }
     }
-    if (button.action == StepActions.next) {
-      _controller.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
-      return;
-    }
-    if (button.action == StepActions.skip) {
-      _controller.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
-      return;
+    switch (button.action) {
+      case StepActions.submit:
+      case StepActions.next:
+      case StepActions.skip:
+        _controller.nextPage(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeIn,
+        );
+        return;
     }
   }
 }

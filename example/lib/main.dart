@@ -29,14 +29,22 @@ class MyApp extends StatelessWidget {
           InformationStep(
             title: 'Information 2 title',
             buttons: [
-              const StepButton.submit(),
+              const StepButton.next(),
             ],
           ),
         ],
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
           await Future.delayed(Duration(seconds: 3));
-          return false;
+          // return [];
+          return [
+            InformationStep(
+              title: 'NEW INFORMATION STEP',
+              buttons: [
+                const StepButton.next(),
+              ],
+            ),
+          ];
         },
         onFinish: () {
           print('>>> FINISHED');
