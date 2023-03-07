@@ -17,8 +17,21 @@ class MyApp extends StatelessWidget {
       ),
       home: SurveyFlow(
         initialSteps: [
-          InformationStep(title: 'Information title'),
-          InformationStep(title: 'Information 2 title'),
+          InformationStep(
+            title: 'Information title',
+            buttons: [
+              const StepButton.next(),
+              const StepButton.skip(
+                style: StepButtonStyle.secondary,
+              ),
+            ],
+          ),
+          InformationStep(
+            title: 'Information 2 title',
+            buttons: [
+              const StepButton.submit(),
+            ],
+          ),
         ],
         onSubmit: (results) async {
           print('>>> SUBMIT $results');

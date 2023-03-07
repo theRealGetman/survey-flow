@@ -85,5 +85,12 @@ class _SurveyFlowState extends State<SurveyFlow> {
       );
       return;
     }
+    if (button.action == StepActions.skip) {
+      _controller.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      );
+      return;
+    }
   }
 }
