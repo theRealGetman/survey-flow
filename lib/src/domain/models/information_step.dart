@@ -1,11 +1,12 @@
-import 'package:survey_flow/src/domain/models/step_button.dart';
-import 'package:survey_flow/src/domain/models/survey_step.dart';
+import 'package:survey_flow/survey_flow.dart';
 
 class InformationStep implements SurveyStep {
   InformationStep({
     this.id,
     required this.title,
     this.description,
+    this.image,
+    this.backgroundImage,
     this.buttons = const [
       StepButton.next(),
     ],
@@ -20,5 +21,7 @@ class InformationStep implements SurveyStep {
   @override
   final String? description;
 
+  final StepImage? image;
+  final StepImage? backgroundImage;
   final List<StepButton> buttons;
 }

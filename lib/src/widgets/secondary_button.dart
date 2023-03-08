@@ -27,6 +27,7 @@ class _SecondaryButtonState extends State<SecondaryButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: SurveyFlowTheme.of(context).theme.colors.background,
       child: InkWell(
         onTap: isLoading
             ? null
@@ -71,21 +72,28 @@ class _SecondaryButtonState extends State<SecondaryButton> {
       stepButton.text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: Theme.of(context).textTheme.labelLarge,
+      style: SurveyFlowTheme.of(context).theme.textStyles.secondaryButton,
     );
   }
 
   Widget _progressIndicator(BuildContext context) {
     final double progressSize =
         Theme.of(context).textTheme.labelLarge?.fontSize ?? 16.0;
+    if (kIsWeb) {
+      return SizedBox(
+        width: progressSize,
+        height: progressSize,
+        child: const CircularProgressIndicator(strokeWidth: 2.0),
+      );
+    }
     return SizedBox(
       width: progressSize,
       height: progressSize,
-      child: kIsWeb || !Platform.isIOS || !Platform.isMacOS
-          ? const CircularProgressIndicator(strokeWidth: 2.0)
-          : CupertinoActivityIndicator(
+      child: Platform.isIOS || Platform.isMacOS
+          ? CupertinoActivityIndicator(
               radius: progressSize / 2,
-            ),
+            )
+          : const CircularProgressIndicator(strokeWidth: 2.0),
     );
   }
 }

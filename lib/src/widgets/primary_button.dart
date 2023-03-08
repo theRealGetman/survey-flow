@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:survey_flow/src/domain/models/models.dart';
-import 'package:survey_flow/src/utils/callbacks.dart';
+import 'package:survey_flow/survey_flow.dart';
 
 class PrimaryButton extends StatefulWidget {
   const PrimaryButton({
@@ -33,7 +32,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           vertical: 12.0,
           horizontal: 16.0,
         ),
-        foregroundColor: Theme.of(context).primaryColor,
+        backgroundColor: SurveyFlowTheme.of(context).theme.colors.button,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             32.0,
@@ -76,21 +75,28 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       stepButton.text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: Theme.of(context).textTheme.labelLarge,
+      style: SurveyFlowTheme.of(context).theme.textStyles.primaryButton,
     );
   }
 
   Widget _progressIndicator(BuildContext context) {
     final double progressSize =
         Theme.of(context).textTheme.labelLarge?.fontSize ?? 16.0;
+    if (kIsWeb) {
+      return SizedBox(
+        width: progressSize,
+        height: progressSize,
+        child: const CircularProgressIndicator(strokeWidth: 2.0),
+      );
+    }
     return SizedBox(
       width: progressSize,
       height: progressSize,
-      child: kIsWeb || !Platform.isIOS || !Platform.isMacOS
-          ? const CircularProgressIndicator(strokeWidth: 2.0)
-          : CupertinoActivityIndicator(
+      child: Platform.isIOS || Platform.isMacOS
+          ? CupertinoActivityIndicator(
               radius: progressSize / 2,
-            ),
+            )
+          : const CircularProgressIndicator(strokeWidth: 2.0),
     );
   }
 }

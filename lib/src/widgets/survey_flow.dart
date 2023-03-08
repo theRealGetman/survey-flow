@@ -10,6 +10,8 @@ class SurveyFlow extends StatefulWidget {
     this.errorPlaceholder,
     this.actionHandler,
     this.onSubmit,
+    this.themeData = const SurveyFlowThemeData(),
+    this.backgroundImage,
   }) : super(key: key);
 
   final List<SurveyStep> initialSteps;
@@ -21,6 +23,8 @@ class SurveyFlow extends StatefulWidget {
   // else returned steps would be added to the queue
   final Future<List<SurveyStep>> Function(List<StepResult> results)? onSubmit;
   final VoidCallback onFinish;
+  final SurveyFlowThemeData themeData;
+  final StepImage? backgroundImage;
 
   @override
   State<SurveyFlow> createState() => _SurveyFlowState();
@@ -40,15 +44,27 @@ class _SurveyFlowState extends State<SurveyFlow> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView.builder(
-        controller: _controller,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: steps.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _mapStep(context, steps[index]);
-        },
-      ),
+    return SurveyFlowTheme(
+      theme: widget.themeData,
+      child: Builder(builder: (context) {
+        return Scaffold(
+          backgroundColor: SurveyFlowTheme.of(context).theme.colors.background,
+          body: Stack(
+            children: [
+              if (widget.backgroundImage != null)
+                BackgroundStepImage(image: widget.backgroundImage!),
+              PageView.builder(
+                controller: _controller,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: steps.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _mapStep(context, steps[index]);
+                },
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 

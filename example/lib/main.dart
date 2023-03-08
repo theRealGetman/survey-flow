@@ -16,9 +16,21 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: SurveyFlow(
+        backgroundImage: const StepImage.image(
+          'https://e7.pngegg.com/pngimages/535/3/png-transparent-black-and-white-seamless-chevron-zigzag-pattern.png',
+          source: StepImageSource.network,
+          opacity: 0.1,
+          position: ImagePosition.fill(),
+        ),
         initialSteps: [
           InformationStep(
             title: 'Information title',
+            description: 'Bla bla bla description for this step',
+            image: const StepImage.svg(
+              'https://www.svgrepo.com/show/24762/round-done-button.svg',
+              source: StepImageSource.network,
+              width: 0.3,
+            ),
             buttons: [
               const StepButton.next(),
               const StepButton.skip(
@@ -28,6 +40,10 @@ class MyApp extends StatelessWidget {
           ),
           InformationStep(
             title: 'Information 2 title',
+            image: const StepImage.image(
+              'https://icon-library.com/images/completed-icon/completed-icon-28.jpg',
+              source: StepImageSource.network,
+            ),
             buttons: [
               const StepButton.next(),
             ],
@@ -35,11 +51,15 @@ class MyApp extends StatelessWidget {
         ],
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
-          await Future.delayed(Duration(seconds: 3));
+          await Future.delayed(const Duration(seconds: 3));
           // return [];
           return [
             InformationStep(
               title: 'NEW INFORMATION STEP',
+              image: const StepImage.lottie(
+                'assets/lottie/task-completed.json',
+                source: StepImageSource.local,
+              ),
               buttons: [
                 const StepButton.next(),
               ],
