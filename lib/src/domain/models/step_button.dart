@@ -30,6 +30,18 @@ class StepButton {
   final String text;
   final String action;
   final StepButtonStyle style;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is StepButton &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          text == other.text &&
+          action == other.action;
+
+  @override
+  int get hashCode => id.hashCode ^ text.hashCode ^ action.hashCode;
 }
 
 enum StepButtonStyle { primary, secondary }

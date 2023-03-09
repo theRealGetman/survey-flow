@@ -75,6 +75,11 @@ class _SurveyFlowState extends State<SurveyFlow> {
           step: step as InformationStep,
           onPressed: _handleOnPressed,
         );
+      case SingleSelectStep:
+        return SingleSelectStepWidget(
+          step: step as SingleSelectStep,
+          onSelected: _handleOnPressed,
+        );
       default:
         return const SizedBox();
     }

@@ -1,12 +1,12 @@
-import 'package:survey_flow/src/domain/models/select_option.dart';
-import 'package:survey_flow/src/domain/models/survey_step.dart';
+import 'package:survey_flow/survey_flow.dart';
 
 class SingleSelectStep implements SurveyStep {
-  SingleSelectStep({
+  const SingleSelectStep({
     required this.title,
     required this.options,
     this.id,
     this.description,
+    this.backgroundImage,
   });
 
   @override
@@ -19,4 +19,5 @@ class SingleSelectStep implements SurveyStep {
   final String? description;
 
   final List<SelectOption> options;
+  final StepImage? backgroundImage;
 }

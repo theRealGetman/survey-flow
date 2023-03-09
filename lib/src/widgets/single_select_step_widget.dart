@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:survey_flow/survey_flow.dart';
 
-class InformationStepWidget extends StatelessWidget {
-  const InformationStepWidget({
+class SingleSelectStepWidget extends StatefulWidget {
+  const SingleSelectStepWidget({
     Key? key,
     required this.step,
-    required this.onPressed,
+    required this.onSelected,
   }) : super(key: key);
 
-  final InformationStep step;
-  final ButtonPressedCallback onPressed;
+  final SingleSelectStep step;
+  final ButtonPressedCallback onSelected;
+
+  @override
+  State<SingleSelectStepWidget> createState() => _SingleSelectStepWidgetState();
+}
+
+class _SingleSelectStepWidgetState extends State<SingleSelectStepWidget> {
+  bool isLoading = false;
+  SelectOption? _selected;
+
+  SingleSelectStep get step => widget.step;
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +60,8 @@ class InformationStepWidget extends StatelessWidget {
                               .description,
                         ),
                       ),
-                    if (step.image != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
-                        child: StepImageWidget(
-                          image: step.image!,
-                        ),
-                      ),
                     const Spacer(),
-                    _buttons(context),
+                    _options(context),
                   ],
                 ),
               ),
@@ -69,21 +72,38 @@ class InformationStepWidget extends StatelessWidget {
     );
   }
 
-  Widget _buttons(BuildContext context) {
+  Widget _options(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: step.buttons.length,
+      itemCount: step.options.length,
       itemBuilder: (BuildContext context, int index) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            StepButtonWidget(
-              stepButton: step.buttons[index],
-              onPressed: onPressed,
-            ),
-          ],
+        return SelectionOptionWidget(
+          option: step.options[index],
+          loading: isLoading,
+          selected: _selected == step.options[index],
+          onSelected: (SelectOption option) async {
+            if (isLoading) {
+              return;
+            }
+            setState(() {
+              isLoading = true;
+              _selected = option;
+            });
+
+            await widget.onSelected(
+              option,
+              StepResult(
+                stepId: step.id ?? 'not defined',
+                value: option.value,
+              ),
+            );
+
+            setState(() {
+              isLoading = false;
+            });
+          },
         );
       },
       separatorBuilder: (BuildContext context, int index) {

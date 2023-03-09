@@ -1,7 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:survey_flow/survey_flow.dart';
 
@@ -35,7 +31,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         backgroundColor: SurveyFlowTheme.of(context).theme.colors.button,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
-            32.0,
+            SurveyFlowTheme.of(context).theme.dimens.borderRadius,
           ),
         ),
       ),
@@ -65,7 +61,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       children: [
         _title(context),
         const SizedBox(width: 12.0),
-        _progressIndicator(context),
+        const StepProgressIndicator(),
       ],
     );
   }
@@ -76,27 +72,6 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: SurveyFlowTheme.of(context).theme.textStyles.primaryButton,
-    );
-  }
-
-  Widget _progressIndicator(BuildContext context) {
-    final double progressSize =
-        Theme.of(context).textTheme.labelLarge?.fontSize ?? 16.0;
-    if (kIsWeb) {
-      return SizedBox(
-        width: progressSize,
-        height: progressSize,
-        child: const CircularProgressIndicator(strokeWidth: 2.0),
-      );
-    }
-    return SizedBox(
-      width: progressSize,
-      height: progressSize,
-      child: Platform.isIOS || Platform.isMacOS
-          ? CupertinoActivityIndicator(
-              radius: progressSize / 2,
-            )
-          : const CircularProgressIndicator(strokeWidth: 2.0),
     );
   }
 }

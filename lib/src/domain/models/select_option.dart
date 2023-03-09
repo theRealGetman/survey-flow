@@ -1,13 +1,14 @@
-class SelectOption<T> {
-  SelectOption({
-    required this.title,
+import 'package:survey_flow/survey_flow.dart';
+
+class SelectOption<T> extends StepButton {
+  const SelectOption({
+    required super.text,
     required this.value,
-    this.id,
+    super.id,
     this.description,
+    super.action = StepActions.next,
   });
 
-  final String? id;
-  final String title;
   final String? description;
   final T value;
 }

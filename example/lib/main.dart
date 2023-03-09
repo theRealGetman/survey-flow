@@ -22,48 +22,24 @@ class MyApp extends StatelessWidget {
           opacity: 0.1,
           position: ImagePosition.fill(),
         ),
-        initialSteps: [
-          InformationStep(
-            title: 'Information title',
-            description: 'Bla bla bla description for this step',
-            image: const StepImage.svg(
-              'https://www.svgrepo.com/show/24762/round-done-button.svg',
-              source: StepImageSource.network,
-              width: 0.3,
-            ),
-            buttons: [
-              const StepButton.next(),
-              const StepButton.skip(
-                style: StepButtonStyle.secondary,
-              ),
-            ],
+        themeData: SurveyFlowThemeData(
+          colors: SFColors(
+            option: Colors.green.shade50.withOpacity(0.5),
+            optionSelected: Colors.green.shade200,
           ),
-          InformationStep(
-            title: 'Information 2 title',
-            image: const StepImage.image(
-              'https://icon-library.com/images/completed-icon/completed-icon-28.jpg',
-              source: StepImageSource.network,
-            ),
-            buttons: [
-              const StepButton.next(),
-            ],
-          ),
+        ),
+        initialSteps: const [
+          Mocks.informationStep,
+          Mocks.informationStepWithImage,
+          Mocks.singleSelect,
         ],
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
           await Future.delayed(const Duration(seconds: 3));
           // return [];
           return [
-            InformationStep(
-              title: 'NEW INFORMATION STEP',
-              image: const StepImage.lottie(
-                'assets/lottie/task-completed.json',
-                source: StepImageSource.local,
-              ),
-              buttons: [
-                const StepButton.next(),
-              ],
-            ),
+            // Mocks.informationStepWithLottie,
+            Mocks.singleSelect,
           ];
         },
         onFinish: () {
@@ -72,4 +48,95 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class Mocks {
+  static const InformationStep informationStep = InformationStep(
+    title: 'Information title',
+    description: 'Bla bla bla description for this step',
+    image: StepImage.svg(
+      'https://www.svgrepo.com/show/24762/round-done-button.svg',
+      source: StepImageSource.network,
+      width: 0.3,
+    ),
+    buttons: [
+      StepButton.next(),
+      StepButton.skip(
+        style: StepButtonStyle.secondary,
+      ),
+    ],
+  );
+
+  static const InformationStep informationStepWithImage = InformationStep(
+    title: 'Information title',
+    description: 'Bla bla bla description for this step',
+    image: StepImage.image(
+      'https://icon-library.com/images/completed-icon/completed-icon-28.jpg',
+      source: StepImageSource.network,
+    ),
+    buttons: [
+      StepButton.next(),
+      StepButton.skip(
+        style: StepButtonStyle.secondary,
+      ),
+    ],
+  );
+
+  static const InformationStep informationStepWithLottie = InformationStep(
+    title: 'Information title',
+    description: 'Bla bla bla description for this step',
+    image: StepImage.lottie(
+      'assets/lottie/task-completed.json',
+      source: StepImageSource.local,
+    ),
+    buttons: [
+      StepButton.next(),
+      StepButton.skip(
+        style: StepButtonStyle.secondary,
+      ),
+    ],
+  );
+
+  static const SingleSelectStep singleSelect = SingleSelectStep(
+    title: 'Select one option to move forward',
+    description: 'Bla bla bla description for this step',
+    options: [
+      SelectOption(
+        text: 'Option 1',
+        description: 'Option description',
+        value: 'option_1',
+      ),
+      SelectOption(
+        text: 'Option 2',
+        value: 'option_2',
+      ),
+      SelectOption(
+        text: 'Option 3',
+        description:
+            'Option long description that should take at least two rows',
+        value: 'option_3',
+      ),
+      SelectOption(
+        text: 'Option 4',
+        value: 'option_4',
+      ),
+      // SelectOption(
+      //   text: 'Option 5',
+      //   value: 'option_5',
+      // ),
+      // SelectOption(
+      //   text: 'Option 6',
+      //   description: 'Option description',
+      //   value: 'option_6',
+      // ),
+      // SelectOption(
+      //   text: 'Option 7',
+      //   value: 'option_7',
+      // ),
+      // SelectOption(
+      //   text: 'Option 8',
+      //   value: 'option_8',
+      // ),
+    ],
+  );
 }

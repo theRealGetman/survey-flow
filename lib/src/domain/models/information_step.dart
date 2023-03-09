@@ -1,7 +1,7 @@
 import 'package:survey_flow/survey_flow.dart';
 
 class InformationStep implements SurveyStep {
-  InformationStep({
+  const InformationStep({
     this.id,
     required this.title,
     this.description,
