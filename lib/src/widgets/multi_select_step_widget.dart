@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:survey_flow/survey_flow.dart';
 
-class SingleSelectStepWidget extends StatefulWidget {
-  const SingleSelectStepWidget({
+class MultiSelectStepWidget extends StatefulWidget {
+  const MultiSelectStepWidget({
     Key? key,
     required this.step,
-    required this.onSelected,
+    required this.onPressed,
   }) : super(key: key);
 
-  final SingleSelectStep step;
-  final ButtonPressedCallback onSelected;
+  final MultiSelectStep step;
+  final ButtonPressedCallback onPressed;
 
   @override
-  State<SingleSelectStepWidget> createState() => _SingleSelectStepWidgetState();
+  State<MultiSelectStepWidget> createState() => _MultiSelectStepWidgetState();
 }
 
-class _SingleSelectStepWidgetState extends State<SingleSelectStepWidget> {
+class _MultiSelectStepWidgetState extends State<MultiSelectStepWidget> {
   bool isLoading = false;
-  SelectOption? _selected;
+  final List<SelectOption> _selected = [];
 
-  SingleSelectStep get step => widget.step;
+  MultiSelectStep get step => widget.step;
+
+  bool get minimumItemsSelected =>
+      step.minimumAmountOfOptionsSelected == null ||
+      _selected.length >= step.minimumAmountOfOptionsSelected!;
+
+  bool get maximumItemsSelected =>
+      step.maximumAmountOfOptionsSelected != null &&
+      _selected.length == step.maximumAmountOfOptionsSelected!;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +70,17 @@ class _SingleSelectStepWidgetState extends State<SingleSelectStepWidget> {
                       ),
                     const Spacer(),
                     _options(context),
+                    SizedBox(
+                      height: SurveyFlowTheme.of(context)
+                          .theme
+                          .dimens
+                          .optionItemsMargin,
+                    ),
+                    PrimaryButton(
+                      stepButton: step.primaryButton,
+                      enabled: minimumItemsSelected,
+                      onPressed: _onPressed,
+                    ),
                   ],
                 ),
               ),
@@ -72,6 +91,27 @@ class _SingleSelectStepWidgetState extends State<SingleSelectStepWidget> {
     );
   }
 
+  Future<void> _onPressed(StepButton button, [StepResult? result]) async {
+    if (isLoading) {
+      return;
+    }
+    setState(() {
+      isLoading = true;
+    });
+
+    await widget.onPressed(
+      button,
+      StepResult(
+        stepId: step.id ?? 'not defined',
+        value: _selected,
+      ),
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   Widget _options(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
@@ -79,29 +119,18 @@ class _SingleSelectStepWidgetState extends State<SingleSelectStepWidget> {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: step.options.length,
       itemBuilder: (BuildContext context, int index) {
-        return SelectionOptionWidget(
+        return SelectionOptionWidget.multi(
           option: step.options[index],
           loading: isLoading,
-          selected: _selected == step.options[index],
+          enabled: !maximumItemsSelected,
+          selected: _selected.contains(step.options[index]),
           onSelected: (SelectOption option) async {
-            if (isLoading) {
-              return;
-            }
             setState(() {
-              isLoading = true;
-              _selected = option;
-            });
-
-            await widget.onSelected(
-              option,
-              StepResult(
-                stepId: step.id ?? 'not defined',
-                value: option.value,
-              ),
-            );
-
-            setState(() {
-              isLoading = false;
+              if (_selected.contains(option)) {
+                _selected.remove(option);
+              } else {
+                _selected.add(option);
+              }
             });
           },
         );

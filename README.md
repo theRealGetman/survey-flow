@@ -4,8 +4,8 @@
 3) [x] Loading state
 4) [ ] Widgets
    1) [x] Information
-   2) [ ] Single select
-   3) [ ] Multi select
+   2) [x] Single select
+   3) [x] Multi select
    4) [ ] Number request
    5) [ ] Date request
    6) [ ] Text Request

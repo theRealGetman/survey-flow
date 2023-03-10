@@ -58,7 +58,10 @@ class InformationStepWidget extends StatelessWidget {
                         ),
                       ),
                     const Spacer(),
-                    _buttons(context),
+                    StepButtonsList(
+                      buttons: step.buttons,
+                      onPressed: onPressed,
+                    ),
                   ],
                 ),
               ),
@@ -66,29 +69,6 @@ class InformationStepWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buttons(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: step.buttons.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            StepButtonWidget(
-              stepButton: step.buttons[index],
-              onPressed: onPressed,
-            ),
-          ],
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 12.0);
-      },
     );
   }
 }

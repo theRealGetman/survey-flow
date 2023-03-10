@@ -6,10 +6,12 @@ class PrimaryButton extends StatefulWidget {
     Key? key,
     required this.stepButton,
     required this.onPressed,
+    this.enabled = true,
   }) : super(key: key);
 
   final StepButton stepButton;
   final ButtonPressedCallback onPressed;
+  final bool enabled;
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonState();
@@ -35,7 +37,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           ),
         ),
       ),
-      onPressed: isLoading
+      onPressed: !widget.enabled || isLoading
           ? null
           : () async {
               if (isLoading) {

@@ -1,6 +1,4 @@
-import 'package:survey_flow/src/domain/models/select_option.dart';
-import 'package:survey_flow/src/domain/models/step_button.dart';
-import 'package:survey_flow/src/domain/models/survey_step.dart';
+import 'package:survey_flow/survey_flow.dart';
 
 class MultiSelectStep implements SurveyStep {
   const MultiSelectStep({
@@ -10,9 +8,8 @@ class MultiSelectStep implements SurveyStep {
     this.description,
     this.minimumAmountOfOptionsSelected,
     this.maximumAmountOfOptionsSelected,
-    this.buttons = const [
-      StepButton.next(),
-    ],
+    this.backgroundImage,
+    this.primaryButton = const StepButton.next(),
   });
 
   @override
@@ -25,10 +22,8 @@ class MultiSelectStep implements SurveyStep {
   final String? description;
 
   final List<SelectOption> options;
-
-  final List<StepButton> buttons;
-
+  final StepButton primaryButton;
   final int? minimumAmountOfOptionsSelected;
-
   final int? maximumAmountOfOptionsSelected;
+  final StepImage? backgroundImage;
 }

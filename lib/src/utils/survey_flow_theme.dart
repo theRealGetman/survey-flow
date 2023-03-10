@@ -31,11 +31,15 @@ class Dimens {
     this.horizontalPadding = 16.0,
     this.verticalPadding = 24.0,
     this.borderRadius = 8.0,
+    this.optionItemsMargin = 12.0,
+    this.optionsToButtonMargin = 12.0,
   });
 
   final double horizontalPadding;
   final double verticalPadding;
   final double borderRadius;
+  final double optionItemsMargin;
+  final double optionsToButtonMargin;
 }
 
 class TextStyles {

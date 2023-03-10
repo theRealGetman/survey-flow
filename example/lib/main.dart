@@ -24,14 +24,15 @@ class MyApp extends StatelessWidget {
         ),
         themeData: SurveyFlowThemeData(
           colors: SFColors(
-            option: Colors.green.shade50.withOpacity(0.5),
-            optionSelected: Colors.green.shade200,
+            option: Colors.green.shade100.withOpacity(0.5),
+            optionSelected: Colors.green.shade300,
           ),
         ),
         initialSteps: const [
           Mocks.informationStep,
           Mocks.informationStepWithImage,
           Mocks.singleSelect,
+          Mocks.multiSelect,
         ],
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           // return [];
           return [
             // Mocks.informationStepWithLottie,
-            Mocks.singleSelect,
+            Mocks.multiSelect,
           ];
         },
         onFinish: () {
@@ -136,6 +137,46 @@ class Mocks {
       // SelectOption(
       //   text: 'Option 8',
       //   value: 'option_8',
+      // ),
+    ],
+  );
+
+  static const MultiSelectStep multiSelect = MultiSelectStep(
+    title: 'Select one option to move forward',
+    description: 'Bla bla bla description for this step',
+    minimumAmountOfOptionsSelected: 1,
+    maximumAmountOfOptionsSelected: 2,
+    options: [
+      SelectOption(
+        text: 'Option 1',
+        description: 'Option description',
+        value: 'option_1',
+      ),
+      SelectOption(
+        text: 'Option 2',
+        value: 'option_2',
+      ),
+      SelectOption(
+        text: 'Option 3',
+        description:
+            'Option long description that should take at least two rows',
+        value: 'option_3',
+      ),
+      SelectOption(
+        text: 'Option 4',
+        value: 'option_4',
+      ),
+      // SelectOption(
+      //   text: 'Option 5',
+      //   value: 'option_5',
+      // ),
+      // SelectOption(
+      //   text: 'Option 6',
+      //   value: 'option_6',
+      // ),
+      // SelectOption(
+      //   text: 'Option 7',
+      //   value: 'option_7',
       // ),
     ],
   );
