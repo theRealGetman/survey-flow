@@ -6,4 +6,9 @@ class StepResult<T> {
     required this.stepId,
     required this.value,
   });
+
+  @override
+  String toString() {
+    return 'StepResult{stepId: $stepId, value: $value}';
+  }
 }

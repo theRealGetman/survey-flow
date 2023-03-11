@@ -1,24 +1,15 @@
-import 'package:survey_flow/src/domain/models/step_button.dart';
-import 'package:survey_flow/src/domain/models/survey_step.dart';
+import 'package:survey_flow/survey_flow.dart';
 
-class TextRequestStep implements SurveyStep {
+class TextRequestStep extends SurveyRequestStep {
   const TextRequestStep({
-    required this.title,
-    this.id,
-    this.description,
-    this.buttons = const [
+    required super.title,
+    super.id,
+    super.description,
+    super.buttons = const [
       StepButton.next(),
     ],
+    super.backgroundImage,
+    super.type = RequestType.text,
+    super.hint,
   });
-
-  @override
-  final String? id;
-
-  @override
-  final String title;
-
-  @override
-  final String? description;
-
-  final List<StepButton> buttons;
 }

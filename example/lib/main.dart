@@ -33,6 +33,8 @@ class MyApp extends StatelessWidget {
           Mocks.informationStepWithImage,
           Mocks.singleSelect,
           Mocks.multiSelect,
+          Mocks.numberRequestStep,
+          Mocks.textRequestStep,
         ],
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
@@ -62,9 +64,7 @@ class Mocks {
     ),
     buttons: [
       StepButton.next(),
-      StepButton.skip(
-        style: StepButtonStyle.secondary,
-      ),
+      StepButton.skip(),
     ],
   );
 
@@ -77,9 +77,7 @@ class Mocks {
     ),
     buttons: [
       StepButton.next(),
-      StepButton.skip(
-        style: StepButtonStyle.secondary,
-      ),
+      StepButton.skip(),
     ],
   );
 
@@ -92,9 +90,7 @@ class Mocks {
     ),
     buttons: [
       StepButton.next(),
-      StepButton.skip(
-        style: StepButtonStyle.secondary,
-      ),
+      StepButton.skip(),
     ],
   );
 
@@ -178,6 +174,26 @@ class Mocks {
       //   text: 'Option 7',
       //   value: 'option_7',
       // ),
+    ],
+  );
+
+  static const NumberRequestStep numberRequestStep = NumberRequestStep(
+    title: 'Number request title',
+    description: 'Bla bla bla description for this step',
+    hint: 'Your age',
+    buttons: [
+      StepButton.next(),
+      StepButton.skip(),
+    ],
+  );
+
+  static const TextRequestStep textRequestStep = TextRequestStep(
+    title: 'Text request title',
+    description: 'Bla bla bla description for this step',
+    hint: 'Your name',
+    buttons: [
+      StepButton.next(),
+      StepButton.skip(),
     ],
   );
 }

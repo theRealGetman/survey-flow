@@ -17,7 +17,7 @@ class StepButton {
   const StepButton.skip({
     this.id,
     this.text = 'Skip',
-    this.style = StepButtonStyle.primary,
+    this.style = StepButtonStyle.secondary,
   }) : action = StepActions.skip;
 
   const StepButton.submit({

@@ -6,9 +6,9 @@
    1) [x] Information
    2) [x] Single select
    3) [x] Multi select
-   4) [ ] Number request
+   4) [x] Number request
    5) [ ] Date request
-   6) [ ] Text Request
+   6) [x] Text Request
 5) [ ] Custom actions
 6) [ ] Custom widgets
 7) [x] Custom styling (use inherited widget theme)

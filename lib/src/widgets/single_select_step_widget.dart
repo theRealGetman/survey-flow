@@ -23,52 +23,29 @@ class _SingleSelectStepWidgetState extends State<SingleSelectStepWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        if (step.backgroundImage != null)
-          BackgroundStepImage(image: step.backgroundImage!),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: SafeArea(
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical:
-                      SurveyFlowTheme.of(context).theme.dimens.verticalPadding,
-                  horizontal: SurveyFlowTheme.of(context)
-                      .theme
-                      .dimens
-                      .horizontalPadding,
-                ),
-                child: Column(
-                  children: [
-                    const Spacer(),
-                    Text(
-                      step.title,
-                      textAlign: TextAlign.center,
-                      style: SurveyFlowTheme.of(context).theme.textStyles.title,
-                    ),
-                    if (step.description?.isNotEmpty == true)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12.0),
-                        child: Text(
-                          step.description!,
-                          textAlign: TextAlign.center,
-                          style: SurveyFlowTheme.of(context)
-                              .theme
-                              .textStyles
-                              .description,
-                        ),
-                      ),
-                    const Spacer(),
-                    _options(context),
-                  ],
-                ),
+    return StepContainer(
+      step: step,
+      child: Column(
+        children: [
+          const Spacer(),
+          Text(
+            step.title,
+            textAlign: TextAlign.center,
+            style: SurveyFlowTheme.of(context).theme.textStyles.title,
+          ),
+          if (step.description?.isNotEmpty == true)
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Text(
+                step.description!,
+                textAlign: TextAlign.center,
+                style: SurveyFlowTheme.of(context).theme.textStyles.description,
               ),
             ),
-          ),
-        ),
-      ],
+          const Spacer(),
+          _options(context),
+        ],
+      ),
     );
   }
 

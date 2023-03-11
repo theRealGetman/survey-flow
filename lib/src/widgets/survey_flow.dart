@@ -85,13 +85,19 @@ class _SurveyFlowState extends State<SurveyFlow> {
           step: step as MultiSelectStep,
           onPressed: _handleOnPressed,
         );
+      case NumberRequestStep:
+      case TextRequestStep:
+        return DataRequestStepWidget(
+          step: step as SurveyRequestStep,
+          onPressed: _handleOnPressed,
+        );
       default:
         return const SizedBox();
     }
   }
 
   Future<void> _handleOnPressed(StepButton button, [StepResult? result]) async {
-    if (result != null) {
+    if (result != null && button.action != StepActions.skip) {
       results.add(result);
     }
     if (_controller.page?.toInt() == steps.length - 1) {

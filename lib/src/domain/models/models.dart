@@ -10,5 +10,6 @@ export 'single_select_step.dart';
 export 'step_actions.dart';
 export 'step_button.dart';
 export 'step_result.dart';
+export 'survey_request_step.dart';
 export 'survey_step.dart';
 export 'text_request_step.dart';

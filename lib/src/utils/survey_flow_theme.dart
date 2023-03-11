@@ -30,6 +30,8 @@ class Dimens {
   const Dimens({
     this.horizontalPadding = 16.0,
     this.verticalPadding = 24.0,
+    this.textFieldHorizontalPadding = 8.0,
+    this.textFieldVerticalPadding = 16.0,
     this.borderRadius = 8.0,
     this.optionItemsMargin = 12.0,
     this.optionsToButtonMargin = 12.0,
@@ -37,6 +39,8 @@ class Dimens {
 
   final double horizontalPadding;
   final double verticalPadding;
+  final double textFieldVerticalPadding;
+  final double textFieldHorizontalPadding;
   final double borderRadius;
   final double optionItemsMargin;
   final double optionsToButtonMargin;
