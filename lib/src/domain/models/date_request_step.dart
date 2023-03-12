@@ -1,27 +1,19 @@
 import 'package:survey_flow/survey_flow.dart';
 
-class DateRequestStep implements SurveyStep {
-  DateRequestStep({
-    this.id,
-    required this.title,
-    this.description,
-    this.buttons = const [
+class DateRequestStep extends SurveyRequestStep {
+  const DateRequestStep({
+    required super.title,
+    super.id,
+    super.description,
+    super.buttons = const [
       StepButton.next(),
     ],
-    this.backgroundImage,
+    super.backgroundImage,
+    super.type = RequestType.date,
+    super.hint,
+    this.dateFormat,
   });
 
-  @override
-  final String? id;
-
-  @override
-  final String title;
-
-  @override
-  final String? description;
-
-  @override
-  final StepImage? backgroundImage;
-
-  final List<StepButton> buttons;
+  /// default 'd MMMM yyyy' for date, 'hh:mm' for time and 'd MMM yyyy hh:mm' for datetime
+  final String? dateFormat;
 }

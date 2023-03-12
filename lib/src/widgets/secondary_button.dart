@@ -23,7 +23,7 @@ class _SecondaryButtonState extends State<SecondaryButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: SurveyFlowTheme.of(context).theme.colors.background,
+      color: Colors.transparent,
       child: InkWell(
         onTap: isLoading
             ? null

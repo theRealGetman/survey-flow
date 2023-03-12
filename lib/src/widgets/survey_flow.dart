@@ -87,6 +87,7 @@ class _SurveyFlowState extends State<SurveyFlow> {
         );
       case NumberRequestStep:
       case TextRequestStep:
+      case DateRequestStep:
         return DataRequestStepWidget(
           step: step as SurveyRequestStep,
           onPressed: _handleOnPressed,

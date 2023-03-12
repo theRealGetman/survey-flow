@@ -7,8 +7,9 @@
    2) [x] Single select
    3) [x] Multi select
    4) [x] Number request
-   5) [ ] Date request
-   6) [x] Text Request
+   5) [x] Date request
+   6) [x] Text request
+   7) [ ] Rating request
 5) [ ] Custom actions
 6) [ ] Custom widgets
 7) [x] Custom styling (use inherited widget theme)

@@ -30,4 +30,14 @@ class SurveyRequestStep implements SurveyStep {
   final List<StepButton> buttons;
 }
 
-enum RequestType { text, textMultiline, name, email, numberInt, numberDouble }
+enum RequestType {
+  text,
+  textMultiline,
+  name,
+  email,
+  numberInt,
+  numberDouble,
+  date,
+  time,
+  dateAndTime,
+}

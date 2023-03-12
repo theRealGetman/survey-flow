@@ -35,14 +35,18 @@ class MyApp extends StatelessWidget {
           Mocks.multiSelect,
           Mocks.numberRequestStep,
           Mocks.textRequestStep,
+          Mocks.timeRequestStep,
+          Mocks.dateRequestStep,
+          Mocks.dateAndTimeRequestStep,
         ],
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
           await Future.delayed(const Duration(seconds: 3));
           // return [];
           return [
-            // Mocks.informationStepWithLottie,
-            Mocks.multiSelect,
+            Mocks.informationStepWithLottie,
+            // Mocks.multiSelect,
+            // Mocks.dateRequestStep,
           ];
         },
         onFinish: () {
@@ -194,6 +198,35 @@ class Mocks {
     buttons: [
       StepButton.next(),
       StepButton.skip(),
+    ],
+  );
+
+  static const DateRequestStep dateRequestStep = DateRequestStep(
+    title: 'Date request title',
+    description: 'Bla bla bla description for this step',
+    hint: 'Your date of birth',
+    buttons: [
+      StepButton.next(),
+    ],
+  );
+
+  static const DateRequestStep timeRequestStep = DateRequestStep(
+    title: 'Time request title',
+    description: 'Bla bla bla description for this step',
+    hint: 'Your time of birth',
+    type: RequestType.time,
+    buttons: [
+      StepButton.next(),
+    ],
+  );
+
+  static const DateRequestStep dateAndTimeRequestStep = DateRequestStep(
+    title: 'Date and time request title',
+    description: 'Bla bla bla description for this step',
+    hint: 'Your date and time of birth',
+    type: RequestType.dateAndTime,
+    buttons: [
+      StepButton.next(),
     ],
   );
 }
