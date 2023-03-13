@@ -39,10 +39,16 @@ class MyApp extends StatelessWidget {
           Mocks.dateRequestStep,
           Mocks.dateAndTimeRequestStep,
         ],
+        actionHandler: {
+          'action:notificationsPermission': ([StepResult? result]) async {
+            print('REQUEST NOTIFICATION PERMISSION');
+            await Future.delayed(Duration(seconds: 2));
+            return StepActions.submit;
+          },
+        },
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
           await Future.delayed(const Duration(seconds: 3));
-          // return [];
           return [
             Mocks.informationStepWithLottie,
             // Mocks.multiSelect,
@@ -67,8 +73,10 @@ class Mocks {
       width: 0.3,
     ),
     buttons: [
-      StepButton.next(),
-      StepButton.skip(),
+      StepButton(
+        action: 'action:notificationsPermission',
+        text: 'Next',
+      ),
     ],
   );
 
@@ -121,23 +129,6 @@ class Mocks {
         text: 'Option 4',
         value: 'option_4',
       ),
-      // SelectOption(
-      //   text: 'Option 5',
-      //   value: 'option_5',
-      // ),
-      // SelectOption(
-      //   text: 'Option 6',
-      //   description: 'Option description',
-      //   value: 'option_6',
-      // ),
-      // SelectOption(
-      //   text: 'Option 7',
-      //   value: 'option_7',
-      // ),
-      // SelectOption(
-      //   text: 'Option 8',
-      //   value: 'option_8',
-      // ),
     ],
   );
 
@@ -166,18 +157,6 @@ class Mocks {
         text: 'Option 4',
         value: 'option_4',
       ),
-      // SelectOption(
-      //   text: 'Option 5',
-      //   value: 'option_5',
-      // ),
-      // SelectOption(
-      //   text: 'Option 6',
-      //   value: 'option_6',
-      // ),
-      // SelectOption(
-      //   text: 'Option 7',
-      //   value: 'option_7',
-      // ),
     ],
   );
 

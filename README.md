@@ -9,8 +9,7 @@
    4) [x] Number request
    5) [x] Date request
    6) [x] Text request
-   7) [ ] Rating request
-5) [ ] Custom actions
+5) [x] Custom actions
 6) [ ] Custom widgets
 7) [x] Custom styling (use inherited widget theme)
 8) [ ] BottomSheet view

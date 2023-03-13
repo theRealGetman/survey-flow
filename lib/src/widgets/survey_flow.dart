@@ -17,10 +17,10 @@ class SurveyFlow extends StatefulWidget {
   final List<SurveyStep> initialSteps;
   final Widget? errorPlaceholder;
   final Widget? loadingPlaceholder;
-  final Map<String, Function>? actionHandler;
+  final Map<String, CustomActionCallback>? actionHandler;
 
-  // if onSubmit returns empty list - onFinish will be called right after onSubmit is finished
-  // else returned steps would be added to the queue
+  /// if onSubmit returns empty list - onFinish will be called right after onSubmit is finished
+  /// else returned steps would be added to the queue
   final Future<List<SurveyStep>> Function(List<StepResult> results)? onSubmit;
   final VoidCallback onFinish;
   final SurveyFlowThemeData themeData;
@@ -98,10 +98,16 @@ class _SurveyFlowState extends State<SurveyFlow> {
   }
 
   Future<void> _handleOnPressed(StepButton button, [StepResult? result]) async {
-    if (result != null && button.action != StepActions.skip) {
+    String action = button.action;
+    // handle custom actions
+    if (widget.actionHandler?.containsKey(action) == true) {
+      action = await widget.actionHandler![action]!(result);
+    }
+    if (result != null && action != StepActions.skip) {
       results.add(result);
     }
-    if (_controller.page?.toInt() == steps.length - 1) {
+    if (action == StepActions.submit ||
+        _controller.page?.toInt() == steps.length - 1) {
       bool shouldFinish = true;
       // last page, so we need to submit
       if (widget.onSubmit != null) {
@@ -116,7 +122,7 @@ class _SurveyFlowState extends State<SurveyFlow> {
         return;
       }
     }
-    switch (button.action) {
+    switch (action) {
       case StepActions.submit:
       case StepActions.next:
       case StepActions.skip:
