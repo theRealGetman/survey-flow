@@ -11,4 +11,9 @@ class SelectOption<T> extends StepButton {
 
   final String? description;
   final T value;
+
+  @override
+  String toString() {
+    return 'SelectOption{id: $id, value: $value}';
+  }
 }

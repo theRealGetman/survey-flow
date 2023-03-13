@@ -12,12 +12,14 @@ class SurveyFlow extends StatefulWidget {
     this.onSubmit,
     this.themeData = const SurveyFlowThemeData(),
     this.backgroundImage,
+    this.widgetHandler,
   }) : super(key: key);
 
   final List<SurveyStep> initialSteps;
   final Widget? errorPlaceholder;
   final Widget? loadingPlaceholder;
   final Map<String, CustomActionCallback>? actionHandler;
+  final CustomWidgetBuilder? widgetHandler;
 
   /// if onSubmit returns empty list - onFinish will be called right after onSubmit is finished
   /// else returned steps would be added to the queue
@@ -69,6 +71,16 @@ class _SurveyFlowState extends State<SurveyFlow> {
   }
 
   Widget _mapStep(BuildContext context, SurveyStep step) {
+    if (widget.widgetHandler != null) {
+      final Widget? customWidget = widget.widgetHandler!(
+        context,
+        step,
+        _handleOnPressed,
+      );
+      if (customWidget != null) {
+        return customWidget;
+      }
+    }
     switch (step.runtimeType) {
       case InformationStep:
         return InformationStepWidget(
@@ -93,7 +105,10 @@ class _SurveyFlowState extends State<SurveyFlow> {
           onPressed: _handleOnPressed,
         );
       default:
-        return const SizedBox();
+        return UnknownStep(
+          step: step,
+          onPressed: _handleOnPressed,
+        );
     }
   }
 

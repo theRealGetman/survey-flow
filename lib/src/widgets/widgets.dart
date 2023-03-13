@@ -14,3 +14,4 @@ export 'step_container.dart';
 export 'step_image_widget.dart';
 export 'step_progress_indicator.dart';
 export 'survey_flow.dart';
+export 'unknown_step.dart';

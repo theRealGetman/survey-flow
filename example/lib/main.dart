@@ -38,13 +38,27 @@ class MyApp extends StatelessWidget {
           Mocks.timeRequestStep,
           Mocks.dateRequestStep,
           Mocks.dateAndTimeRequestStep,
+          Mocks.customStep,
         ],
         actionHandler: {
           'action:notificationsPermission': ([StepResult? result]) async {
             print('REQUEST NOTIFICATION PERMISSION');
             await Future.delayed(Duration(seconds: 2));
-            return StepActions.submit;
+            return StepActions.next;
           },
+        },
+        widgetHandler: (
+          BuildContext context,
+          SurveyStep step,
+          ButtonPressedCallback onPressed,
+        ) {
+          if (step is CustomSurveyStep) {
+            return CustomStepWidget(
+              step: step,
+              onPressed: onPressed,
+            );
+          }
+          return null;
         },
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
@@ -116,8 +130,9 @@ class Mocks {
         value: 'option_1',
       ),
       SelectOption(
-        text: 'Option 2',
+        text: 'Notification permission',
         value: 'option_2',
+        action: 'action:notificationsPermission',
       ),
       SelectOption(
         text: 'Option 3',
@@ -208,4 +223,91 @@ class Mocks {
       StepButton.next(),
     ],
   );
+
+  static const CustomSurveyStep customStep = CustomSurveyStep(
+    id: 'customStepId',
+    title: 'This is my custom step title',
+    description: 'Description for this custom step',
+    image: StepImage.svg(
+      'https://www.svgrepo.com/show/24762/round-done-button.svg',
+      source: StepImageSource.network,
+      width: 0.3,
+    ),
+    primaryButton: StepButton.submit(text: 'Let`s start'),
+  );
+}
+
+class CustomSurveyStep implements SurveyStep {
+  const CustomSurveyStep({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.primaryButton,
+    required this.image,
+    this.backgroundImage,
+  });
+
+  @override
+  final String id;
+
+  @override
+  final String title;
+
+  @override
+  final String description;
+
+  @override
+  final StepImage? backgroundImage;
+
+  final StepImage image;
+  final StepButton primaryButton;
+}
+
+class CustomStepWidget extends StatelessWidget {
+  const CustomStepWidget({
+    Key? key,
+    required this.step,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final CustomSurveyStep step;
+  final ButtonPressedCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return StepContainer(
+      step: step,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Spacer(),
+          StepImageWidget(
+            image: step.image,
+          ),
+          const SizedBox(height: 24.0),
+          Text(
+            step.title,
+            textAlign: TextAlign.start,
+            style: SurveyFlowTheme.of(context).theme.textStyles.title,
+          ),
+          const SizedBox(height: 24.0),
+          Text(
+            step.description,
+            textAlign: TextAlign.start,
+            style: SurveyFlowTheme.of(context).theme.textStyles.description,
+          ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              PrimaryButton(
+                stepButton: const StepButton.next(),
+                onPressed: onPressed,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
