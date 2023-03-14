@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'image.g.dart';
+
+@JsonSerializable()
 class StepImage {
   const StepImage({
     required this.path,
@@ -9,8 +14,7 @@ class StepImage {
     this.opacity = 1.0,
   });
 
-  const StepImage.svg(
-    this.path, {
+  const StepImage.svg(this.path, {
     required this.source,
     this.width,
     this.height,
@@ -18,8 +22,7 @@ class StepImage {
     this.opacity = 1.0,
   }) : type = StepImageType.svg;
 
-  const StepImage.image(
-    this.path, {
+  const StepImage.image(this.path, {
     required this.source,
     this.width,
     this.height,
@@ -37,7 +40,15 @@ class StepImage {
   }) : type = StepImageType.lottie;
 
   final String path;
+  @JsonKey(
+    defaultValue: StepImageSource.network,
+    unknownEnumValue: StepImageSource.network,
+  )
   final StepImageSource source;
+  @JsonKey(
+    defaultValue: StepImageType.image,
+    unknownEnumValue: StepImageType.image,
+  )
   final StepImageType type;
 
   // if less than 1 will use that value as fraction of screen width
@@ -45,6 +56,11 @@ class StepImage {
   final double? height;
   final double opacity;
   final ImagePosition? position;
+
+  Map<String, dynamic> toJson() => _$StepImageToJson(this);
+
+  factory StepImage.fromJson(Map<String, dynamic> json) =>
+      _$StepImageFromJson(json);
 }
 
 enum StepImageSource {
@@ -58,6 +74,7 @@ enum StepImageType {
   lottie,
 }
 
+@JsonSerializable()
 class ImagePosition {
   const ImagePosition({
     this.left,
@@ -79,4 +96,9 @@ class ImagePosition {
   final double? right;
   final double? bottom;
   final bool fill;
+
+  Map<String, dynamic> toJson() => _$ImagePositionToJson(this);
+
+  factory ImagePosition.fromJson(Map<String, dynamic> json) =>
+      _$ImagePositionFromJson(json);
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:survey_flow/survey_flow.dart';
 
-class UnknownStep extends StatelessWidget {
-  const UnknownStep({
+class UnknownStepWidget extends StatelessWidget {
+  const UnknownStepWidget({
     Key? key,
     required this.step,
     required this.onPressed,

@@ -13,3 +13,4 @@ export 'step_result.dart';
 export 'survey_request_step.dart';
 export 'survey_step.dart';
 export 'text_request_step.dart';
+export 'unknown_step.dart';

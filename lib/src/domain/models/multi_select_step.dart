@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:survey_flow/survey_flow.dart';
 
+part 'multi_select_step.g.dart';
+
+@JsonSerializable()
 class MultiSelectStep implements SurveyStep {
   const MultiSelectStep({
     this.id,
@@ -21,9 +25,16 @@ class MultiSelectStep implements SurveyStep {
   @override
   final String? description;
 
+  @override
+  final StepImage? backgroundImage;
+
   final List<SelectOption> options;
   final StepButton primaryButton;
   final int? minimumAmountOfOptionsSelected;
   final int? maximumAmountOfOptionsSelected;
-  final StepImage? backgroundImage;
+
+  Map<String, dynamic> toJson() => _$MultiSelectStepToJson(this);
+
+  factory MultiSelectStep.fromJson(Map<String, dynamic> json) =>
+      _$MultiSelectStepFromJson(json);
 }

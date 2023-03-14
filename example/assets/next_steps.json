@@ -1,0 +1,24 @@
+[
+  {
+    "id": "information_lottie_step",
+    "stepType": "information",
+    "title": "Information title",
+    "description": "Bla bla bla description for this step",
+    "image": {
+      "path": "assets/lottie/task-completed.json",
+      "source": "local",
+      "type": "lottie"
+    },
+    "buttons": [
+      {
+        "action": "action:next",
+        "text": "Next"
+      },
+      {
+        "action": "action:skip",
+        "text": "Skip",
+        "style": "secondary"
+      }
+    ]
+  }
+]

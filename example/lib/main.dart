@@ -1,12 +1,54 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:survey_flow/survey_flow.dart';
 
-void main() {
-  runApp(const MyApp());
+part 'main.g.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // add converter for custom step
+  stepsConverters.addAll({
+    'customStep': (v) => CustomSurveyStep.fromJson(v),
+  });
+
+  // use SurveyStepConverter to parse steps
+  final String initialStepsData =
+      await rootBundle.loadString("assets/initial_steps.json");
+  final List<dynamic> initialStepsDecoded = jsonDecode(initialStepsData);
+  final String nextStepsData =
+      await rootBundle.loadString("assets/next_steps.json");
+  final List<dynamic> nextStepsDecoded = jsonDecode(nextStepsData);
+
+  final List<SurveyStep> initialSteps = initialStepsDecoded
+      .map((e) =>
+          const SurveyStepConverter().fromJson(e as Map<String, dynamic>?))
+      .toList();
+  final List<SurveyStep> nextSteps = nextStepsDecoded
+      .map((e) =>
+          const SurveyStepConverter().fromJson(e as Map<String, dynamic>?))
+      .toList();
+
+  runApp(
+    MyApp(
+      initialSteps: initialSteps,
+      nextSteps: nextSteps,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    this.initialSteps,
+    this.nextSteps,
+  });
+
+  final List<SurveyStep>? initialSteps;
+  final List<SurveyStep>? nextSteps;
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +70,19 @@ class MyApp extends StatelessWidget {
             optionSelected: Colors.green.shade300,
           ),
         ),
-        initialSteps: const [
-          Mocks.informationStep,
-          Mocks.informationStepWithImage,
-          Mocks.singleSelect,
-          Mocks.multiSelect,
-          Mocks.numberRequestStep,
-          Mocks.textRequestStep,
-          Mocks.timeRequestStep,
-          Mocks.dateRequestStep,
-          Mocks.dateAndTimeRequestStep,
-          Mocks.customStep,
-        ],
+        initialSteps: initialSteps ??
+            const [
+              Mocks.informationStep,
+              Mocks.informationStepWithImage,
+              Mocks.singleSelect,
+              Mocks.multiSelect,
+              Mocks.numberRequestStep,
+              Mocks.textRequestStep,
+              Mocks.timeRequestStep,
+              Mocks.dateRequestStep,
+              Mocks.dateAndTimeRequestStep,
+              Mocks.customStep,
+            ],
         actionHandler: {
           'action:notificationsPermission': ([StepResult? result]) async {
             print('REQUEST NOTIFICATION PERMISSION');
@@ -50,8 +93,7 @@ class MyApp extends StatelessWidget {
         widgetHandler: (
           BuildContext context,
           SurveyStep step,
-          ButtonPressedCallback onPressed,
-        ) {
+          ButtonPressedCallback onPressed,) {
           if (step is CustomSurveyStep) {
             return CustomStepWidget(
               step: step,
@@ -63,11 +105,12 @@ class MyApp extends StatelessWidget {
         onSubmit: (results) async {
           print('>>> SUBMIT $results');
           await Future.delayed(const Duration(seconds: 3));
-          return [
-            Mocks.informationStepWithLottie,
-            // Mocks.multiSelect,
-            // Mocks.dateRequestStep,
-          ];
+          return nextSteps ??
+              [
+                Mocks.informationStepWithLottie,
+                // Mocks.multiSelect,
+                // Mocks.dateRequestStep,
+              ];
         },
         onFinish: () {
           print('>>> FINISHED');
@@ -137,7 +180,7 @@ class Mocks {
       SelectOption(
         text: 'Option 3',
         description:
-            'Option long description that should take at least two rows',
+        'Option long description that should take at least two rows',
         value: 'option_3',
       ),
       SelectOption(
@@ -148,7 +191,7 @@ class Mocks {
   );
 
   static const MultiSelectStep multiSelect = MultiSelectStep(
-    title: 'Select one option to move forward',
+    title: 'Select from 1 to 2 options to move forward',
     description: 'Bla bla bla description for this step',
     minimumAmountOfOptionsSelected: 1,
     maximumAmountOfOptionsSelected: 2,
@@ -165,7 +208,7 @@ class Mocks {
       SelectOption(
         text: 'Option 3',
         description:
-            'Option long description that should take at least two rows',
+        'Option long description that should take at least two rows',
         value: 'option_3',
       ),
       SelectOption(
@@ -237,6 +280,7 @@ class Mocks {
   );
 }
 
+@JsonSerializable()
 class CustomSurveyStep implements SurveyStep {
   const CustomSurveyStep({
     required this.id,
@@ -261,6 +305,11 @@ class CustomSurveyStep implements SurveyStep {
 
   final StepImage image;
   final StepButton primaryButton;
+
+  Map<String, dynamic> toJson() => _$CustomSurveyStepToJson(this);
+
+  factory CustomSurveyStep.fromJson(Map<String, dynamic> json) =>
+      _$CustomSurveyStepFromJson(json);
 }
 
 class CustomStepWidget extends StatelessWidget {

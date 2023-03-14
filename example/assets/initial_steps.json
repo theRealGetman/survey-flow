@@ -1,0 +1,199 @@
+[
+  {
+    "id": "information_svg_step",
+    "stepType": "information",
+    "title": "Information title",
+    "description": "Bla bla bla description for this step",
+    "image": {
+      "path": "https://www.svgrepo.com/show/24762/round-done-button.svg",
+      "source": "network",
+      "type": "svg",
+      "width": 0.3
+    },
+    "buttons": [
+      {
+        "action": "action:notificationsPermission",
+        "text": "Next"
+      }
+    ]
+  },
+  {
+    "id": "information_image_step",
+    "stepType": "information",
+    "title": "Information title",
+    "description": "Bla bla bla description for this step",
+    "image": {
+      "path": "https://icon-library.com/images/completed-icon/completed-icon-28.jpg"
+    },
+    "buttons": [
+      {
+        "action": "action:next",
+        "text": "Next"
+      },
+      {
+        "action": "action:skip",
+        "text": "Skip",
+        "style": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "single_select_step",
+    "stepType": "singleSelect",
+    "title": "Select one option to move forward",
+    "description": "Bla bla bla description for this step",
+    "options": [
+      {
+        "id": "option_id_1",
+        "text": "Option 1",
+        "description": "Option description",
+        "value": "option_1"
+      },
+      {
+        "id": "option_id_2",
+        "text": "Notification permission",
+        "value": "option_2",
+        "action": "action:notificationsPermission"
+      },
+      {
+        "id": "option_id_3",
+        "text": "Option 3",
+        "description": "Option long description that should take at least two rows",
+        "value": "option_3"
+      },
+      {
+        "id": "option_id_4",
+        "text": "Option 4",
+        "value": "option_4"
+      }
+    ]
+  },
+  {
+    "id": "multi_select_step",
+    "stepType": "multiSelect",
+    "title": "Select from 1 to 2 options to move forward",
+    "description": "Bla bla bla description for this step",
+    "minimumAmountOfOptionsSelected": 1,
+    "maximumAmountOfOptionsSelected": 2,
+    "options": [
+      {
+        "id": "option_id_1",
+        "text": "Option 1",
+        "description": "Option description",
+        "value": "option_1"
+      },
+      {
+        "id": "option_id_2",
+        "text": "Option 2",
+        "value": "option_2"
+      },
+      {
+        "id": "option_id_3",
+        "text": "Option 3",
+        "description": "Option long description that should take at least two rows",
+        "value": "option_3"
+      },
+      {
+        "id": "option_id_4",
+        "text": "Option 4",
+        "value": "option_4"
+      }
+    ]
+  },
+  {
+    "id": "number_request_step",
+    "stepType": "request",
+    "title": "Number request title",
+    "description": "Bla bla bla description for this step",
+    "hint": "Your age",
+    "type": "numberInt",
+    "buttons": [
+      {
+        "action": "action:next",
+        "text": "Next"
+      },
+      {
+        "action": "action:skip",
+        "text": "Skip",
+        "style": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "text_request_step",
+    "stepType": "request",
+    "title": "Text request title",
+    "description": "Bla bla bla description for this step",
+    "hint": "Your name",
+    "type": "text",
+    "buttons": [
+      {
+        "action": "action:next",
+        "text": "Next"
+      },
+      {
+        "action": "action:skip",
+        "text": "Skip",
+        "style": "secondary"
+      }
+    ]
+  },
+  {
+    "id": "date_request_step",
+    "stepType": "dateRequest",
+    "title": "Date request title",
+    "description": "Bla bla bla description for this step",
+    "hint": "Your date of birth",
+    "type": "date",
+    "buttons": [
+      {
+        "action": "action:next",
+        "text": "Next"
+      }
+    ]
+  },
+  {
+    "id": "time_request_step",
+    "stepType": "dateRequest",
+    "title": "Time request title",
+    "description": "Bla bla bla description for this step",
+    "hint": "Your time of birth",
+    "type": "time",
+    "buttons": [
+      {
+        "action": "action:next",
+        "text": "Next"
+      }
+    ]
+  },
+  {
+    "id": "date_and_time_request_step",
+    "stepType": "dateRequest",
+    "title": "Date and time request title",
+    "description": "Bla bla bla description for this step",
+    "hint": "Your date and time of birth",
+    "type": "dateAndTime",
+    "buttons": [
+      {
+        "action": "action:next",
+        "text": "Next"
+      }
+    ]
+  },
+  {
+    "id": "customStepId",
+    "stepType": "customStep",
+    "title": "This is my custom step title",
+    "description": "Description for this custom step",
+    "image": {
+      "path": "https://www.svgrepo.com/show/24762/round-done-button.svg",
+      "source": "network",
+      "type": "svg",
+      "width": 0.3
+    },
+    "primaryButton": {
+      "action": "action:submit",
+      "text": "Let`s start"
+    }
+  }
+]

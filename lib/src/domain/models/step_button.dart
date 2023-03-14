@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:survey_flow/src/domain/models/step_actions.dart';
 
+part 'step_button.g.dart';
+
+@JsonSerializable()
 class StepButton {
   const StepButton({
     required this.action,
@@ -29,7 +33,15 @@ class StepButton {
   final String? id;
   final String text;
   final String action;
+  @JsonKey(
+    unknownEnumValue: StepButtonStyle.primary,
+  )
   final StepButtonStyle style;
+
+  Map<String, dynamic> toJson() => _$StepButtonToJson(this);
+
+  factory StepButton.fromJson(Map<String, dynamic> json) =>
+      _$StepButtonFromJson(json);
 
   @override
   bool operator ==(Object other) =>

@@ -1,6 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:survey_flow/survey_flow.dart';
 
-class SelectOption<T> extends StepButton {
+part 'select_option.g.dart';
+
+@JsonSerializable()
+class SelectOption extends StepButton {
   const SelectOption({
     required super.text,
     required this.value,
@@ -10,7 +14,13 @@ class SelectOption<T> extends StepButton {
   });
 
   final String? description;
-  final T value;
+  final dynamic value;
+
+  @override
+  Map<String, dynamic> toJson() => _$SelectOptionToJson(this);
+
+  factory SelectOption.fromJson(Map<String, dynamic> json) =>
+      _$SelectOptionFromJson(json);
 
   @override
   String toString() {
