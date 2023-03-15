@@ -22,33 +22,26 @@ class _SecondaryButtonState extends State<SecondaryButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: isLoading
-            ? null
-            : () async {
-                if (isLoading) {
-                  return;
-                }
-                setState(() {
-                  isLoading = true;
-                });
+    return TextButton(
+      style: SurveyFlowTheme.of(context).theme.buttonStyles.secondary ??
+          SFButtonStyles.getSecondaryDefault(context),
+      onPressed: isLoading
+          ? null
+          : () async {
+              if (isLoading) {
+                return;
+              }
+              setState(() {
+                isLoading = true;
+              });
 
-                await widget.onPressed(stepButton);
+              await widget.onPressed(stepButton);
 
-                setState(() {
-                  isLoading = false;
-                });
-              },
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8.0,
-            horizontal: 16.0,
-          ),
-          child: isLoading ? _loading(context) : _title(context),
-        ),
-      ),
+              setState(() {
+                isLoading = false;
+              });
+            },
+      child: isLoading ? _loading(context) : _title(context),
     );
   }
 
@@ -68,7 +61,6 @@ class _SecondaryButtonState extends State<SecondaryButton> {
       stepButton.text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: SurveyFlowTheme.of(context).theme.textStyles.secondaryButton,
     );
   }
 }

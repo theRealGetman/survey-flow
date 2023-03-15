@@ -13,5 +13,7 @@
 6) [x] Custom steps
 7) [x] Custom styling (use inherited widget theme)
 8) [x] JsonSerializable
-9) [ ] Extend styling for components
-10) [ ] BottomSheet view
+9) [x] Extend styling for components, check default style
+10) [ ] Primary button disabled predicate for RequestScreens
+11) [ ] Buttons alignment (horizontal / vertical)
+12) [ ] BottomSheet view

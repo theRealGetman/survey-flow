@@ -18,19 +18,45 @@ class InformationStepWidget extends StatelessWidget {
       child: Column(
         children: [
           const Spacer(),
-          Text(
-            step.title,
-            textAlign: TextAlign.center,
-            style: SurveyFlowTheme.of(context).theme.textStyles.title,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  step.title,
+                  textAlign: SurveyFlowTheme.of(context)
+                      .theme
+                      .textStyles
+                      .titleTextAlign,
+                  style: SurveyFlowTheme.of(context).theme.textStyles.title,
+                ),
+              ),
+            ],
           ),
           if (step.description?.isNotEmpty == true)
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: Text(
-                step.description!,
-                textAlign: TextAlign.center,
-                style: SurveyFlowTheme.of(context).theme.textStyles.description,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: SurveyFlowTheme.of(context)
+                          .theme
+                          .dimens
+                          .descriptionToTitleMargin,
+                    ),
+                    child: Text(
+                      step.description!,
+                      textAlign: SurveyFlowTheme.of(context)
+                          .theme
+                          .textStyles
+                          .descriptionTextAlign,
+                      style: SurveyFlowTheme.of(context)
+                          .theme
+                          .textStyles
+                          .description,
+                    ),
+                  ),
+                ),
+              ],
             ),
           if (step.image != null)
             Padding(

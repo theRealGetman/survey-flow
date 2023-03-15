@@ -17,7 +17,11 @@ class StepProgressIndicator extends StatelessWidget {
       return SizedBox(
         width: progressSize,
         height: progressSize,
-        child: const CircularProgressIndicator(strokeWidth: 2.0),
+        child: CircularProgressIndicator(
+          strokeWidth: 2.0,
+          color:
+              SurveyFlowTheme.of(context).theme.colors.progressIndicatorColor,
+        ),
       );
     }
     return SizedBox(
@@ -25,9 +29,19 @@ class StepProgressIndicator extends StatelessWidget {
       height: progressSize,
       child: Platform.isIOS || Platform.isMacOS
           ? CupertinoActivityIndicator(
+              color: SurveyFlowTheme.of(context)
+                  .theme
+                  .colors
+                  .progressIndicatorColor,
               radius: progressSize / 2,
             )
-          : const CircularProgressIndicator(strokeWidth: 2.0),
+          : CircularProgressIndicator(
+              strokeWidth: 2.0,
+              color: SurveyFlowTheme.of(context)
+                  .theme
+                  .colors
+                  .progressIndicatorColor,
+            ),
     );
   }
 }

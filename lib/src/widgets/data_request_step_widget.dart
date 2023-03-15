@@ -35,19 +35,45 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
       child: Column(
         children: [
           const Spacer(),
-          Text(
-            step.title,
-            textAlign: TextAlign.center,
-            style: SurveyFlowTheme.of(context).theme.textStyles.title,
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  step.title,
+                  textAlign: SurveyFlowTheme.of(context)
+                      .theme
+                      .textStyles
+                      .titleTextAlign,
+                  style: SurveyFlowTheme.of(context).theme.textStyles.title,
+                ),
+              ),
+            ],
           ),
           if (step.description?.isNotEmpty == true)
-            Padding(
-              padding: const EdgeInsets.only(top: 12.0),
-              child: Text(
-                step.description!,
-                textAlign: TextAlign.center,
-                style: SurveyFlowTheme.of(context).theme.textStyles.description,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: SurveyFlowTheme.of(context)
+                          .theme
+                          .dimens
+                          .descriptionToTitleMargin,
+                    ),
+                    child: Text(
+                      step.description!,
+                      textAlign: SurveyFlowTheme.of(context)
+                          .theme
+                          .textStyles
+                          .descriptionTextAlign,
+                      style: SurveyFlowTheme.of(context)
+                          .theme
+                          .textStyles
+                          .description,
+                    ),
+                  ),
+                ),
+              ],
             ),
           Padding(
             padding: const EdgeInsets.only(top: 24.0),
@@ -60,38 +86,13 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
               child: AbsorbPointer(
                 absorbing: isDatePicker,
                 child: TextField(
-                  style:
-                      SurveyFlowTheme.of(context).theme.textStyles.description,
+                  style: SurveyFlowTheme.of(context).theme.textStyles.textField,
                   enabled: !isLoading,
-                  decoration: InputDecoration(
-                    hintText: step.hint,
-                    hintStyle: SurveyFlowTheme.of(context)
-                        .theme
-                        .textStyles
-                        .description
-                        .copyWith(
-                          color: SurveyFlowTheme.of(context)
-                              .theme
-                              .textStyles
-                              .description
-                              .color
-                              ?.withOpacity(0.5),
-                        ),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: SurveyFlowTheme.of(context)
-                          .theme
-                          .dimens
-                          .textFieldVerticalPadding,
-                      horizontal: SurveyFlowTheme.of(context)
-                          .theme
-                          .dimens
-                          .textFieldHorizontalPadding,
-                    ),
-                    border: const OutlineInputBorder(),
-                  ),
+                  decoration: _decoration(context),
                   controller: _controller,
                   keyboardType: textInputType,
-                  textAlign: TextAlign.center,
+                  textAlign:
+                      SurveyFlowTheme.of(context).theme.inputStyles.textAlign,
                   onTapOutside: (_) {
                     FocusScope.of(context).unfocus();
                   },
@@ -107,6 +108,18 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
         ],
       ),
     );
+  }
+
+  InputDecoration _decoration(BuildContext context) {
+    if (SurveyFlowTheme.of(context).theme.inputStyles.decorationBuilder !=
+        null) {
+      return SurveyFlowTheme.of(context).theme.inputStyles.decorationBuilder!(
+        context,
+        step,
+      );
+    }
+    return SurveyFlowTheme.of(context).theme.inputStyles.decoration ??
+        SFInputStyles.getDefaultInputDecoration(context, step);
   }
 
   Future<void> _onPressed(StepButton button, [StepResult? result]) async {

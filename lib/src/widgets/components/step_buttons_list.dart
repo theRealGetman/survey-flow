@@ -13,24 +13,33 @@ class StepButtonsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool fullWidth =
+        SurveyFlowTheme.of(context).theme.buttonStyles.buttonWidth ==
+            SFButtonWidth.full;
+
     return ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: buttons.length,
       itemBuilder: (BuildContext context, int index) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            StepButtonWidget(
-              stepButton: buttons[index],
-              onPressed: onPressed,
-            ),
-          ],
-        );
+        return fullWidth
+            ? StepButtonWidget(
+                stepButton: buttons[index],
+                onPressed: onPressed,
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  StepButtonWidget(
+                    stepButton: buttons[index],
+                    onPressed: onPressed,
+                  ),
+                ],
+              );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 12.0);
+        return const SizedBox(height: 8.0);
       },
     );
   }

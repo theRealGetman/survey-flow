@@ -55,21 +55,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: SurveyFlow(
-        backgroundImage: const StepImage.image(
-          'https://e7.pngegg.com/pngimages/535/3/png-transparent-black-and-white-seamless-chevron-zigzag-pattern.png',
-          source: StepImageSource.network,
-          opacity: 0.1,
-          position: ImagePosition.fill(),
+        backgroundImage: const StepImage.svg(
+          'assets/badge.svg',
+          source: StepImageSource.local,
+          position: ImagePosition(right: 0.0, top: 0.0),
         ),
-        themeData: SurveyFlowThemeData(
-          colors: SFColors(
-            option: Colors.green.shade100.withOpacity(0.5),
-            optionSelected: Colors.green.shade300,
-          ),
-        ),
+        themeData: customTheme,
         initialSteps: initialSteps ??
             const [
               Mocks.informationStep,
@@ -93,7 +87,8 @@ class MyApp extends StatelessWidget {
         widgetHandler: (
           BuildContext context,
           SurveyStep step,
-          ButtonPressedCallback onPressed,) {
+          ButtonPressedCallback onPressed,
+        ) {
           if (step is CustomSurveyStep) {
             return CustomStepWidget(
               step: step,
@@ -114,6 +109,99 @@ class MyApp extends StatelessWidget {
         },
         onFinish: () {
           print('>>> FINISHED');
+        },
+      ),
+    );
+  }
+
+  SurveyFlowThemeData get customTheme {
+    return SurveyFlowThemeData(
+      dimens: const SFDimens(
+        buttonBorderRadius: 8.0,
+      ),
+      colors: const SFColors(
+        background: Color(0xff1e1f1f),
+        button: Color(0xff009473),
+        option: Colors.black26,
+        optionSelected: Color(0xff009473),
+        progressIndicatorColor: Colors.white,
+      ),
+      textStyles: SFTextStyles(
+        titleTextAlign: TextAlign.start,
+        title: const TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 24.0,
+          height: 30.0 / 24.0,
+          color: Colors.white,
+        ),
+        descriptionTextAlign: TextAlign.start,
+        description: TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16.0,
+          height: 20.0 / 16.0,
+          color: Colors.white.withOpacity(0.7),
+        ),
+        secondaryButton: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16.0,
+          height: 1.0,
+          color: Colors.white,
+        ),
+        option: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16.0,
+          height: 1.0,
+          color: Colors.white,
+        ),
+        optionDescription: TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 12.0,
+          height: 1.0,
+          color: Colors.white.withOpacity(0.7),
+        ),
+        textField: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontSize: 16.0,
+          height: 20.0 / 16.0,
+          color: Colors.white,
+        ),
+      ),
+      inputStyles: SFInputStyles(
+        textAlign: TextAlign.center,
+        decorationBuilder: (BuildContext context, SurveyRequestStep step) {
+          return InputDecoration(
+            labelText: step.hint,
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            labelStyle: SurveyFlowTheme.of(context)
+                .theme
+                .textStyles
+                .description
+                .copyWith(
+                  color: SurveyFlowTheme.of(context)
+                      .theme
+                      .textStyles
+                      .description
+                      .color
+                      ?.withOpacity(0.5),
+                ),
+            contentPadding: EdgeInsets.symmetric(
+              vertical: SurveyFlowTheme.of(context)
+                  .theme
+                  .dimens
+                  .textFieldVerticalPadding,
+              horizontal: SurveyFlowTheme.of(context)
+                  .theme
+                  .dimens
+                  .textFieldHorizontalPadding,
+            ),
+            border: const UnderlineInputBorder(),
+            enabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white70),
+            ),
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+          );
         },
       ),
     );
@@ -180,7 +268,7 @@ class Mocks {
       SelectOption(
         text: 'Option 3',
         description:
-        'Option long description that should take at least two rows',
+            'Option long description that should take at least two rows',
         value: 'option_3',
       ),
       SelectOption(
@@ -208,7 +296,7 @@ class Mocks {
       SelectOption(
         text: 'Option 3',
         description:
-        'Option long description that should take at least two rows',
+            'Option long description that should take at least two rows',
         value: 'option_3',
       ),
       SelectOption(

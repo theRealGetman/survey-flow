@@ -32,18 +32,11 @@ class SelectionOptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 16.0,
-        ),
-        backgroundColor: _getBackgroundColor(context),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            SurveyFlowTheme.of(context).theme.dimens.borderRadius,
+      style: SurveyFlowTheme.of(context).theme.buttonStyles.selectOption ??
+          SFButtonStyles.getSelectOptionDefault(context).copyWith(
+            backgroundColor:
+                MaterialStateProperty.all(_getBackgroundColor(context)),
           ),
-        ),
-      ),
       onPressed: (!enabled && !selected) || loading
           ? null
           : () {
@@ -89,11 +82,16 @@ class SelectionOptionWidget extends StatelessWidget {
     );
   }
 
-  Color _getBackgroundColor(BuildContext context) {
+  Color _getSelectedColor(BuildContext context) {
+    return SurveyFlowTheme.of(context).theme.colors.optionSelected ??
+        Theme.of(context).primaryColor;
+  }
+
+  Color? _getBackgroundColor(BuildContext context) {
     if (!enabled && !selected) {
-      return SurveyFlowTheme.of(context).theme.colors.option.withOpacity(0.5);
+      return SurveyFlowTheme.of(context).theme.colors.option?.withOpacity(0.5);
     } else if (selected) {
-      return SurveyFlowTheme.of(context).theme.colors.optionSelected;
+      return _getSelectedColor(context);
     }
     return SurveyFlowTheme.of(context).theme.colors.option;
   }

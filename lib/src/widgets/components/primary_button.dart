@@ -25,18 +25,8 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          vertical: 12.0,
-          horizontal: 16.0,
-        ),
-        backgroundColor: SurveyFlowTheme.of(context).theme.colors.button,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            SurveyFlowTheme.of(context).theme.dimens.borderRadius,
-          ),
-        ),
-      ),
+      style: SurveyFlowTheme.of(context).theme.buttonStyles.primary ??
+          SFButtonStyles.getPrimaryDefault(context),
       onPressed: !widget.enabled || isLoading
           ? null
           : () async {
@@ -73,7 +63,6 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       stepButton.text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: SurveyFlowTheme.of(context).theme.textStyles.primaryButton,
     );
   }
 }
