@@ -5,6 +5,7 @@ export 'components/primary_button.dart';
 export 'components/secondary_button.dart';
 export 'components/selection_option_widget.dart';
 export 'components/step_button_widget.dart';
+export 'components/step_buttons.dart';
 export 'components/step_buttons_list.dart';
 export 'components/step_container.dart';
 export 'components/step_image_widget.dart';

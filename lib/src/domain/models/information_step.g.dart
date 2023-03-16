@@ -17,10 +17,13 @@ InformationStep _$InformationStepFromJson(Map<String, dynamic> json) =>
       backgroundImage: json['backgroundImage'] == null
           ? null
           : StepImage.fromJson(json['backgroundImage'] as Map<String, dynamic>),
-      buttons: (json['buttons'] as List<dynamic>?)
-              ?.map((e) => StepButton.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [StepButton.next()],
+      primaryButton: json['primaryButton'] == null
+          ? const StepButton.next()
+          : StepButton.fromJson(json['primaryButton'] as Map<String, dynamic>),
+      secondaryButton: json['secondaryButton'] == null
+          ? null
+          : StepButton.fromJson(
+              json['secondaryButton'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$InformationStepToJson(InformationStep instance) =>
@@ -30,5 +33,6 @@ Map<String, dynamic> _$InformationStepToJson(InformationStep instance) =>
       'description': instance.description,
       'backgroundImage': instance.backgroundImage,
       'image': instance.image,
-      'buttons': instance.buttons,
+      'primaryButton': instance.primaryButton,
+      'secondaryButton': instance.secondaryButton,
     };

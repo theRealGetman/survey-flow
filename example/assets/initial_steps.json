@@ -10,12 +10,10 @@
       "type": "svg",
       "width": 0.3
     },
-    "buttons": [
-      {
-        "action": "action:notificationsPermission",
-        "text": "Next"
-      }
-    ]
+    "primaryButton": {
+      "action": "action:notificationsPermission",
+      "text": "Next"
+    }
   },
   {
     "id": "information_image_step",
@@ -25,17 +23,15 @@
     "image": {
       "path": "https://icon-library.com/images/completed-icon/completed-icon-28.jpg"
     },
-    "buttons": [
-      {
-        "action": "action:next",
-        "text": "Next"
-      },
-      {
-        "action": "action:skip",
-        "text": "Skip",
-        "style": "secondary"
-      }
-    ]
+    "primaryButton": {
+      "action": "action:next",
+      "text": "Next"
+    },
+    "secondaryButton": {
+      "action": "action:skip",
+      "text": "Skip",
+      "style": "secondary"
+    }
   },
   {
     "id": "single_select_step",
@@ -107,17 +103,19 @@
     "description": "Bla bla bla description for this step",
     "hint": "Your age",
     "type": "numberInt",
-    "buttons": [
-      {
-        "action": "action:next",
-        "text": "Next"
-      },
-      {
-        "action": "action:skip",
-        "text": "Skip",
-        "style": "secondary"
+    "primaryButton": {
+      "action": "action:next",
+      "text": "Next",
+      "predicate": {
+        "type": "moreThan",
+        "value": 18
       }
-    ]
+    },
+    "secondaryButton": {
+      "action": "action:skip",
+      "text": "Skip",
+      "style": "secondary"
+    }
   },
   {
     "id": "text_request_step",
@@ -126,17 +124,15 @@
     "description": "Bla bla bla description for this step",
     "hint": "Your name",
     "type": "text",
-    "buttons": [
-      {
-        "action": "action:next",
-        "text": "Next"
-      },
-      {
-        "action": "action:skip",
-        "text": "Skip",
-        "style": "secondary"
-      }
-    ]
+    "primaryButton": {
+      "action": "action:next",
+      "text": "Next"
+    },
+    "secondaryButton": {
+      "action": "action:skip",
+      "text": "Skip",
+      "style": "secondary"
+    }
   },
   {
     "id": "date_request_step",
@@ -145,12 +141,10 @@
     "description": "Bla bla bla description for this step",
     "hint": "Your date of birth",
     "type": "date",
-    "buttons": [
-      {
-        "action": "action:next",
-        "text": "Next"
-      }
-    ]
+    "primaryButton": {
+      "action": "action:next",
+      "text": "Next"
+    }
   },
   {
     "id": "time_request_step",
@@ -159,12 +153,10 @@
     "description": "Bla bla bla description for this step",
     "hint": "Your time of birth",
     "type": "time",
-    "buttons": [
-      {
-        "action": "action:next",
-        "text": "Next"
-      }
-    ]
+    "primaryButton": {
+      "action": "action:next",
+      "text": "Next"
+    }
   },
   {
     "id": "date_and_time_request_step",
@@ -173,12 +165,10 @@
     "description": "Bla bla bla description for this step",
     "hint": "Your date and time of birth",
     "type": "dateAndTime",
-    "buttons": [
-      {
-        "action": "action:next",
-        "text": "Next"
-      }
-    ]
+    "primaryButton": {
+      "action": "action:next",
+      "text": "Next"
+    }
   },
   {
     "id": "customStepId",

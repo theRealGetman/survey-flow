@@ -1,5 +1,6 @@
 library utils;
 
+export 'button_predicate_utils.dart';
 export 'callbacks.dart';
 export 'modals.dart';
 export 'steps_converter.dart';

@@ -11,9 +11,8 @@ class SurveyRequestStep implements SurveyStep {
     required this.type,
     this.hint,
     this.description,
-    this.buttons = const [
-      StepButton.next(),
-    ],
+    this.primaryButton = const StepButton.next(),
+    this.secondaryButton,
     this.backgroundImage,
   });
 
@@ -32,7 +31,8 @@ class SurveyRequestStep implements SurveyStep {
   final String? hint;
   @JsonKey(unknownEnumValue: RequestType.text)
   final RequestType type;
-  final List<StepButton> buttons;
+  final StepButton primaryButton;
+  final StepButton? secondaryButton;
 
   Map<String, dynamic> toJson() => _$SurveyRequestStepToJson(this);
 

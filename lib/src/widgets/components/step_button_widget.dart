@@ -6,10 +6,12 @@ class StepButtonWidget extends StatelessWidget {
     Key? key,
     required this.stepButton,
     required this.onPressed,
+    this.stepValue,
   }) : super(key: key);
 
   final StepButton stepButton;
   final ButtonPressedCallback onPressed;
+  final String? stepValue;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class StepButtonWidget extends StatelessWidget {
         return PrimaryButton(
           stepButton: stepButton,
           onPressed: onPressed,
+          stepValue: stepValue,
         );
       case StepButtonStyle.secondary:
         return SecondaryButton(

@@ -1,5 +1,6 @@
 library models;
 
+export 'button_predicate.dart';
 export 'date_request_step.dart';
 export 'image.dart';
 export 'information_step.dart';

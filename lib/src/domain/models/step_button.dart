@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:survey_flow/src/domain/models/step_actions.dart';
+import 'package:survey_flow/survey_flow.dart';
 
 part 'step_button.g.dart';
 
@@ -10,24 +10,28 @@ class StepButton {
     required this.text,
     this.style = StepButtonStyle.primary,
     this.id,
+    this.predicate,
   });
 
   const StepButton.next({
     this.id,
     this.text = 'Next',
     this.style = StepButtonStyle.primary,
+    this.predicate,
   }) : action = StepActions.next;
 
   const StepButton.skip({
     this.id,
     this.text = 'Skip',
     this.style = StepButtonStyle.secondary,
+    this.predicate,
   }) : action = StepActions.skip;
 
   const StepButton.submit({
     this.id,
     this.text = 'Submit',
     this.style = StepButtonStyle.primary,
+    this.predicate,
   }) : action = StepActions.submit;
 
   final String? id;
@@ -37,6 +41,9 @@ class StepButton {
     unknownEnumValue: StepButtonStyle.primary,
   )
   final StepButtonStyle style;
+
+  /// if request screen value matches pattern, primary button would be enabled
+  final ButtonPredicate? predicate;
 
   Map<String, dynamic> toJson() => _$StepButtonToJson(this);
 

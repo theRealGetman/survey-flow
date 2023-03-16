@@ -7,11 +7,13 @@ class PrimaryButton extends StatefulWidget {
     required this.stepButton,
     required this.onPressed,
     this.enabled = true,
+    this.stepValue,
   }) : super(key: key);
 
   final StepButton stepButton;
   final ButtonPressedCallback onPressed;
   final bool enabled;
+  final String? stepValue;
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonState();
@@ -22,12 +24,21 @@ class _PrimaryButtonState extends State<PrimaryButton> {
 
   bool isLoading = false;
 
+  bool get notEnabled {
+    if (!widget.enabled || isLoading) {
+      return true;
+    } else if (stepButton.predicate != null) {
+      return !stepButton.predicate!.matches(widget.stepValue);
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: SurveyFlowTheme.of(context).theme.buttonStyles.primary ??
           SFButtonStyles.getPrimaryDefault(context),
-      onPressed: !widget.enabled || isLoading
+      onPressed: notEnabled
           ? null
           : () async {
               if (isLoading) {

@@ -96,13 +96,18 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
                   onTapOutside: (_) {
                     FocusScope.of(context).unfocus();
                   },
+                  onChanged: (_) {
+                    setState(() {});
+                  },
                 ),
               ),
             ),
           ),
           const Spacer(),
-          StepButtonsList(
-            buttons: step.buttons,
+          StepButtons(
+            stepValue: _controller.text,
+            primaryButton: step.primaryButton,
+            secondaryButton: step.secondaryButton,
             onPressed: _onPressed,
           ),
         ],

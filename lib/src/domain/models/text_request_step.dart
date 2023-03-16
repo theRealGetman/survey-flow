@@ -9,9 +9,8 @@ class TextRequestStep extends SurveyRequestStep {
     required super.title,
     super.id,
     super.description,
-    super.buttons = const [
-      StepButton.next(),
-    ],
+    super.primaryButton = const StepButton.next(),
+    super.secondaryButton,
     super.backgroundImage,
     super.type = RequestType.text,
     super.hint,

@@ -11,9 +11,8 @@ class InformationStep implements SurveyStep {
     this.description,
     this.image,
     this.backgroundImage,
-    this.buttons = const [
-      StepButton.next(),
-    ],
+    this.primaryButton = const StepButton.next(),
+    this.secondaryButton,
   });
 
   @override
@@ -29,7 +28,8 @@ class InformationStep implements SurveyStep {
   final StepImage? backgroundImage;
 
   final StepImage? image;
-  final List<StepButton> buttons;
+  final StepButton primaryButton;
+  final StepButton? secondaryButton;
 
   Map<String, dynamic> toJson() => _$InformationStepToJson(this);
 

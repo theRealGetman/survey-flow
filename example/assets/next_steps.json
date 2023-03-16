@@ -9,16 +9,14 @@
       "source": "local",
       "type": "lottie"
     },
-    "buttons": [
-      {
-        "action": "action:next",
-        "text": "Next"
-      },
-      {
-        "action": "action:skip",
-        "text": "Skip",
-        "style": "secondary"
-      }
-    ]
+    "primaryButton": {
+      "action": "action:next",
+      "text": "Next"
+    },
+    "secondaryButton": {
+      "action": "action:skip",
+      "text": "Skip",
+      "style": "secondary"
+    }
   }
 ]

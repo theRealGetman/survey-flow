@@ -66,8 +66,9 @@ class InformationStepWidget extends StatelessWidget {
               ),
             ),
           const Spacer(),
-          StepButtonsList(
-            buttons: step.buttons,
+          StepButtons(
+            primaryButton: step.primaryButton,
+            secondaryButton: step.secondaryButton,
             onPressed: onPressed,
           ),
         ],

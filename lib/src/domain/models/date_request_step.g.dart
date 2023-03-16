@@ -11,10 +11,13 @@ DateRequestStep _$DateRequestStepFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       id: json['id'] as String?,
       description: json['description'] as String?,
-      buttons: (json['buttons'] as List<dynamic>?)
-              ?.map((e) => StepButton.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [StepButton.next()],
+      primaryButton: json['primaryButton'] == null
+          ? const StepButton.next()
+          : StepButton.fromJson(json['primaryButton'] as Map<String, dynamic>),
+      secondaryButton: json['secondaryButton'] == null
+          ? null
+          : StepButton.fromJson(
+              json['secondaryButton'] as Map<String, dynamic>),
       backgroundImage: json['backgroundImage'] == null
           ? null
           : StepImage.fromJson(json['backgroundImage'] as Map<String, dynamic>),
@@ -33,7 +36,8 @@ Map<String, dynamic> _$DateRequestStepToJson(DateRequestStep instance) =>
       'backgroundImage': instance.backgroundImage,
       'hint': instance.hint,
       'type': _$RequestTypeEnumMap[instance.type]!,
-      'buttons': instance.buttons,
+      'primaryButton': instance.primaryButton,
+      'secondaryButton': instance.secondaryButton,
       'dateFormat': instance.dateFormat,
     };
 

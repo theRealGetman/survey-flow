@@ -217,12 +217,10 @@ class Mocks {
       source: StepImageSource.network,
       width: 0.3,
     ),
-    buttons: [
-      StepButton(
-        action: 'action:notificationsPermission',
-        text: 'Next',
-      ),
-    ],
+    primaryButton: StepButton(
+      action: 'action:notificationsPermission',
+      text: 'Next',
+    ),
   );
 
   static const InformationStep informationStepWithImage = InformationStep(
@@ -232,10 +230,8 @@ class Mocks {
       'https://icon-library.com/images/completed-icon/completed-icon-28.jpg',
       source: StepImageSource.network,
     ),
-    buttons: [
-      StepButton.next(),
-      StepButton.skip(),
-    ],
+    primaryButton: StepButton.next(),
+    secondaryButton: StepButton.skip(),
   );
 
   static const InformationStep informationStepWithLottie = InformationStep(
@@ -245,10 +241,8 @@ class Mocks {
       'assets/lottie/task-completed.json',
       source: StepImageSource.local,
     ),
-    buttons: [
-      StepButton.next(),
-      StepButton.skip(),
-    ],
+    primaryButton: StepButton.next(),
+    secondaryButton: StepButton.skip(),
   );
 
   static const SingleSelectStep singleSelect = SingleSelectStep(
@@ -310,29 +304,25 @@ class Mocks {
     title: 'Number request title',
     description: 'Bla bla bla description for this step',
     hint: 'Your age',
-    buttons: [
-      StepButton.next(),
-      StepButton.skip(),
-    ],
+    primaryButton: StepButton.next(
+      predicate: ButtonPredicate.moreThan(18),
+    ),
+    secondaryButton: StepButton.skip(),
   );
 
   static const TextRequestStep textRequestStep = TextRequestStep(
     title: 'Text request title',
     description: 'Bla bla bla description for this step',
     hint: 'Your name',
-    buttons: [
-      StepButton.next(),
-      StepButton.skip(),
-    ],
+    primaryButton: StepButton.next(),
+    secondaryButton: StepButton.skip(),
   );
 
   static const DateRequestStep dateRequestStep = DateRequestStep(
     title: 'Date request title',
     description: 'Bla bla bla description for this step',
     hint: 'Your date of birth',
-    buttons: [
-      StepButton.next(),
-    ],
+    primaryButton: StepButton.next(),
   );
 
   static const DateRequestStep timeRequestStep = DateRequestStep(
@@ -340,9 +330,7 @@ class Mocks {
     description: 'Bla bla bla description for this step',
     hint: 'Your time of birth',
     type: RequestType.time,
-    buttons: [
-      StepButton.next(),
-    ],
+    primaryButton: StepButton.next(),
   );
 
   static const DateRequestStep dateAndTimeRequestStep = DateRequestStep(
@@ -350,9 +338,7 @@ class Mocks {
     description: 'Bla bla bla description for this step',
     hint: 'Your date and time of birth',
     type: RequestType.dateAndTime,
-    buttons: [
-      StepButton.next(),
-    ],
+    primaryButton: StepButton.next(),
   );
 
   static const CustomSurveyStep customStep = CustomSurveyStep(
