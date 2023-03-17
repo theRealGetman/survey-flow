@@ -11,7 +11,7 @@ class SelectOption extends StepButton {
     super.id,
     this.description,
     super.action = StepActions.next,
-    super.nextStepId,
+    super.navigationConditions,
   });
 
   final String? description;

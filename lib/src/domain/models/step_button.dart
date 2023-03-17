@@ -11,7 +11,7 @@ class StepButton {
     this.style = StepButtonStyle.primary,
     this.id,
     this.predicate,
-    this.nextStepId,
+    this.navigationConditions,
   });
 
   const StepButton.next({
@@ -19,7 +19,7 @@ class StepButton {
     this.text = 'Next',
     this.style = StepButtonStyle.primary,
     this.predicate,
-    this.nextStepId,
+    this.navigationConditions,
   }) : action = StepActions.next;
 
   const StepButton.skip({
@@ -27,7 +27,7 @@ class StepButton {
     this.text = 'Skip',
     this.style = StepButtonStyle.secondary,
     this.predicate,
-    this.nextStepId,
+    this.navigationConditions,
   }) : action = StepActions.skip;
 
   const StepButton.submit({
@@ -35,7 +35,7 @@ class StepButton {
     this.text = 'Submit',
     this.style = StepButtonStyle.primary,
     this.predicate,
-    this.nextStepId,
+    this.navigationConditions,
   }) : action = StepActions.submit;
 
   final String? id;
@@ -48,7 +48,7 @@ class StepButton {
 
   /// if request screen value matches pattern, primary button would be enabled
   final ButtonPredicate? predicate;
-  final String? nextStepId;
+  final List<ButtonNavigationCondition>? navigationConditions;
 
   Map<String, dynamic> toJson() => _$StepButtonToJson(this);
 
@@ -62,10 +62,19 @@ class StepButton {
           runtimeType == other.runtimeType &&
           id == other.id &&
           text == other.text &&
-          action == other.action;
+          action == other.action &&
+          style == other.style &&
+          predicate == other.predicate &&
+          navigationConditions == other.navigationConditions;
 
   @override
-  int get hashCode => id.hashCode ^ text.hashCode ^ action.hashCode;
+  int get hashCode =>
+      id.hashCode ^
+      text.hashCode ^
+      action.hashCode ^
+      style.hashCode ^
+      predicate.hashCode ^
+      navigationConditions.hashCode;
 }
 
 enum StepButtonStyle { primary, secondary }

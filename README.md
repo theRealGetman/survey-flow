@@ -16,6 +16,6 @@
 9) [x] Extend styling for components, check default style
 10) [x] Primary button disabled predicate for RequestScreens
 11) [x] Custom next step navigation
-12) [ ] Conditional steps
+12) [x] Button navigation conditions
 13) [ ] Buttons alignment (horizontal / vertical)
 14) [ ] BottomSheet view

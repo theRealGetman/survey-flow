@@ -34,21 +34,22 @@ class StepButtons extends StatelessWidget {
         SurveyFlowTheme.of(context).theme.buttonStyles.buttonWidth ==
             SFButtonWidth.full;
     if (fullWidth) {
+      return Row(
+        children: [
+          Expanded(
+            child: StepButtonWidget(
+              stepButton: button,
+              onPressed: onPressed,
+              stepValue: stepValue,
+            ),
+          ),
+        ],
+      );
+    } else {
       return StepButtonWidget(
         stepButton: button,
         onPressed: onPressed,
         stepValue: stepValue,
-      );
-    } else {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          StepButtonWidget(
-            stepButton: button,
-            onPressed: onPressed,
-            stepValue: stepValue,
-          ),
-        ],
       );
     }
   }

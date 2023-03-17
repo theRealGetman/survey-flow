@@ -18,17 +18,17 @@ extension ButtonPredicateUtils on ButtonPredicate {
         }
         return false;
       case ButtonPredicateType.matches:
-        return RegExp(value).hasMatch(stepValue);
+        return RegExp(value).hasMatch(stepValue.toString());
       case ButtonPredicateType.equals:
         if (value is num) {
-          stepValue = num.tryParse(stepValue);
+          stepValue = num.tryParse(stepValue.toString());
         }
         return stepValue == value;
       case ButtonPredicateType.lessThan:
-        stepValue = num.tryParse(stepValue);
+        stepValue = num.tryParse(stepValue.toString());
         return stepValue != null && stepValue < value;
       case ButtonPredicateType.moreThan:
-        stepValue = num.tryParse(stepValue);
+        stepValue = num.tryParse(stepValue.toString());
         return stepValue != null && stepValue > value;
     }
   }

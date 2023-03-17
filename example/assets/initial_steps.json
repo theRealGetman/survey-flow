@@ -44,7 +44,11 @@
         "text": "Custom navigation option",
         "description": "If you select this option number_request_step would be opened next",
         "value": "option_1",
-        "nextStepId": "number_request_step"
+        "navigationConditions": [
+          {
+            "nextStepId": "number_request_step"
+          }
+        ]
       },
       {
         "id": "option_id_2",
@@ -110,7 +114,19 @@
       "predicate": {
         "type": "moreThan",
         "value": 18
-      }
+      },
+      "navigationConditions": [
+        {
+          "nextStepId": "customStepId",
+          "type": "moreThan",
+          "value": 55
+        },
+        {
+          "nextStepId": "time_request_step",
+          "type": "lessThan",
+          "value": 56
+        }
+      ]
     },
     "secondaryButton": {
       "action": "action:skip",

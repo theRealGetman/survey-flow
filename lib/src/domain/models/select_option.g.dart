@@ -12,7 +12,10 @@ SelectOption _$SelectOptionFromJson(Map<String, dynamic> json) => SelectOption(
       id: json['id'] as String?,
       description: json['description'] as String?,
       action: json['action'] as String? ?? StepActions.next,
-      nextStepId: json['nextStepId'] as String?,
+      navigationConditions: (json['navigationConditions'] as List<dynamic>?)
+          ?.map((e) =>
+              ButtonNavigationCondition.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$SelectOptionToJson(SelectOption instance) =>
@@ -20,7 +23,7 @@ Map<String, dynamic> _$SelectOptionToJson(SelectOption instance) =>
       'id': instance.id,
       'text': instance.text,
       'action': instance.action,
-      'nextStepId': instance.nextStepId,
+      'navigationConditions': instance.navigationConditions,
       'description': instance.description,
       'value': instance.value,
     };
