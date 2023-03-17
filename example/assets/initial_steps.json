@@ -41,9 +41,10 @@
     "options": [
       {
         "id": "option_id_1",
-        "text": "Option 1",
-        "description": "Option description",
-        "value": "option_1"
+        "text": "Custom navigation option",
+        "description": "If you select this option number_request_step would be opened next",
+        "value": "option_1",
+        "nextStepId": "number_request_step"
       },
       {
         "id": "option_id_2",

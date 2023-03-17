@@ -138,6 +138,19 @@ class _SurveyFlowState extends State<SurveyFlow> {
         return;
       }
     }
+    if (button.nextStepId?.isNotEmpty == true) {
+      final int nextStepIndex =
+          steps.indexWhere((SurveyStep step) => step.id == button.nextStepId);
+      if (nextStepIndex > -1) {
+        _controller.jumpToPage(nextStepIndex - 1);
+        _controller.animateToPage(
+          nextStepIndex,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeIn,
+        );
+        return;
+      }
+    }
     switch (action) {
       case StepActions.submit:
       case StepActions.next:

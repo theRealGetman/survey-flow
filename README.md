@@ -15,5 +15,7 @@
 8) [x] JsonSerializable
 9) [x] Extend styling for components, check default style
 10) [x] Primary button disabled predicate for RequestScreens
-11) [ ] Buttons alignment (horizontal / vertical)
-12) [ ] BottomSheet view
+11) [x] Custom next step navigation
+12) [ ] Conditional steps
+13) [ ] Buttons alignment (horizontal / vertical)
+14) [ ] BottomSheet view

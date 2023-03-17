@@ -11,6 +11,7 @@ class StepButton {
     this.style = StepButtonStyle.primary,
     this.id,
     this.predicate,
+    this.nextStepId,
   });
 
   const StepButton.next({
@@ -18,6 +19,7 @@ class StepButton {
     this.text = 'Next',
     this.style = StepButtonStyle.primary,
     this.predicate,
+    this.nextStepId,
   }) : action = StepActions.next;
 
   const StepButton.skip({
@@ -25,6 +27,7 @@ class StepButton {
     this.text = 'Skip',
     this.style = StepButtonStyle.secondary,
     this.predicate,
+    this.nextStepId,
   }) : action = StepActions.skip;
 
   const StepButton.submit({
@@ -32,6 +35,7 @@ class StepButton {
     this.text = 'Submit',
     this.style = StepButtonStyle.primary,
     this.predicate,
+    this.nextStepId,
   }) : action = StepActions.submit;
 
   final String? id;
@@ -44,6 +48,7 @@ class StepButton {
 
   /// if request screen value matches pattern, primary button would be enabled
   final ButtonPredicate? predicate;
+  final String? nextStepId;
 
   Map<String, dynamic> toJson() => _$StepButtonToJson(this);
 

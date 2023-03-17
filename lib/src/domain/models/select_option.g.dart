@@ -12,6 +12,7 @@ SelectOption _$SelectOptionFromJson(Map<String, dynamic> json) => SelectOption(
       id: json['id'] as String?,
       description: json['description'] as String?,
       action: json['action'] as String? ?? StepActions.next,
+      nextStepId: json['nextStepId'] as String?,
     );
 
 Map<String, dynamic> _$SelectOptionToJson(SelectOption instance) =>
@@ -19,6 +20,7 @@ Map<String, dynamic> _$SelectOptionToJson(SelectOption instance) =>
       'id': instance.id,
       'text': instance.text,
       'action': instance.action,
+      'nextStepId': instance.nextStepId,
       'description': instance.description,
       'value': instance.value,
     };

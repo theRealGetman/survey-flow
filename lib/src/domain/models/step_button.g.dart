@@ -16,6 +16,7 @@ StepButton _$StepButtonFromJson(Map<String, dynamic> json) => StepButton(
       predicate: json['predicate'] == null
           ? null
           : ButtonPredicate.fromJson(json['predicate'] as Map<String, dynamic>),
+      nextStepId: json['nextStepId'] as String?,
     );
 
 Map<String, dynamic> _$StepButtonToJson(StepButton instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$StepButtonToJson(StepButton instance) =>
       'action': instance.action,
       'style': _$StepButtonStyleEnumMap[instance.style]!,
       'predicate': instance.predicate,
+      'nextStepId': instance.nextStepId,
     };
 
 const _$StepButtonStyleEnumMap = {
