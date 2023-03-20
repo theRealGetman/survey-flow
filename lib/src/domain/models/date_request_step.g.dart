@@ -26,6 +26,10 @@ DateRequestStep _$DateRequestStepFromJson(Map<String, dynamic> json) =>
           RequestType.date,
       hint: json['hint'] as String?,
       dateFormat: json['dateFormat'] as String?,
+      buttonsAlignment: $enumDecodeNullable(
+              _$ButtonsAlignmentEnumMap, json['buttonsAlignment'],
+              unknownValue: ButtonsAlignment.vertical) ??
+          ButtonsAlignment.vertical,
     );
 
 Map<String, dynamic> _$DateRequestStepToJson(DateRequestStep instance) =>
@@ -38,6 +42,7 @@ Map<String, dynamic> _$DateRequestStepToJson(DateRequestStep instance) =>
       'type': _$RequestTypeEnumMap[instance.type]!,
       'primaryButton': instance.primaryButton,
       'secondaryButton': instance.secondaryButton,
+      'buttonsAlignment': _$ButtonsAlignmentEnumMap[instance.buttonsAlignment]!,
       'dateFormat': instance.dateFormat,
     };
 
@@ -51,4 +56,9 @@ const _$RequestTypeEnumMap = {
   RequestType.date: 'date',
   RequestType.time: 'time',
   RequestType.dateAndTime: 'dateAndTime',
+};
+
+const _$ButtonsAlignmentEnumMap = {
+  ButtonsAlignment.vertical: 'vertical',
+  ButtonsAlignment.horizontal: 'horizontal',
 };

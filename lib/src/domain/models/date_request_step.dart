@@ -15,6 +15,7 @@ class DateRequestStep extends SurveyRequestStep {
     super.type = RequestType.date,
     super.hint,
     this.dateFormat,
+    super.buttonsAlignment = ButtonsAlignment.vertical,
   });
 
   /// default 'd MMMM yyyy' for date, 'hh:mm' for time and 'd MMM yyyy hh:mm' for datetime

@@ -14,6 +14,7 @@ class TextRequestStep extends SurveyRequestStep {
     super.backgroundImage,
     super.type = RequestType.text,
     super.hint,
+    super.buttonsAlignment = ButtonsAlignment.vertical,
   });
 
   @override

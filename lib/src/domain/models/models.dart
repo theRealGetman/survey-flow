@@ -2,6 +2,7 @@ library models;
 
 export 'button_navigation_condition.dart';
 export 'button_predicate.dart';
+export 'buttons_alignment.dart';
 export 'date_request_step.dart';
 export 'image.dart';
 export 'information_step.dart';

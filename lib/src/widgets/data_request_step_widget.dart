@@ -108,6 +108,7 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
             stepValue: _controller.text,
             primaryButton: step.primaryButton,
             secondaryButton: step.secondaryButton,
+            buttonsAlignment: step.buttonsAlignment,
             onPressed: _onPressed,
           ),
         ],

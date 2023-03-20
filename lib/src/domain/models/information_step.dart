@@ -13,6 +13,7 @@ class InformationStep implements SurveyStep {
     this.backgroundImage,
     this.primaryButton = const StepButton.next(),
     this.secondaryButton,
+    this.buttonsAlignment = ButtonsAlignment.vertical,
   });
 
   @override
@@ -30,6 +31,10 @@ class InformationStep implements SurveyStep {
   final StepImage? image;
   final StepButton primaryButton;
   final StepButton? secondaryButton;
+  @JsonKey(
+    unknownEnumValue: ButtonsAlignment.vertical,
+  )
+  final ButtonsAlignment buttonsAlignment;
 
   Map<String, dynamic> toJson() => _$InformationStepToJson(this);
 

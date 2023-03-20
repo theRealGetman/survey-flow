@@ -14,6 +14,7 @@ class NumberRequestStep extends SurveyRequestStep {
     super.backgroundImage,
     super.type = RequestType.numberInt,
     super.hint,
+    super.buttonsAlignment = ButtonsAlignment.vertical,
   });
 
   @override

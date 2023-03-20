@@ -109,6 +109,7 @@
     "description": "Bla bla bla description for this step",
     "hint": "Your age",
     "type": "numberInt",
+    "buttonsAlignment": "horizontal",
     "primaryButton": {
       "action": "action:next",
       "text": "Next",
@@ -143,6 +144,7 @@
     "description": "Bla bla bla description for this step",
     "hint": "Your name",
     "type": "text",
+    "buttonsAlignment": "horizontal",
     "primaryButton": {
       "action": "action:next",
       "text": "Next"

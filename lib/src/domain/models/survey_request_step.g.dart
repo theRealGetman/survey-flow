@@ -24,6 +24,10 @@ SurveyRequestStep _$SurveyRequestStepFromJson(Map<String, dynamic> json) =>
       backgroundImage: json['backgroundImage'] == null
           ? null
           : StepImage.fromJson(json['backgroundImage'] as Map<String, dynamic>),
+      buttonsAlignment: $enumDecodeNullable(
+              _$ButtonsAlignmentEnumMap, json['buttonsAlignment'],
+              unknownValue: ButtonsAlignment.vertical) ??
+          ButtonsAlignment.vertical,
     );
 
 Map<String, dynamic> _$SurveyRequestStepToJson(SurveyRequestStep instance) =>
@@ -36,6 +40,7 @@ Map<String, dynamic> _$SurveyRequestStepToJson(SurveyRequestStep instance) =>
       'type': _$RequestTypeEnumMap[instance.type]!,
       'primaryButton': instance.primaryButton,
       'secondaryButton': instance.secondaryButton,
+      'buttonsAlignment': _$ButtonsAlignmentEnumMap[instance.buttonsAlignment]!,
     };
 
 const _$RequestTypeEnumMap = {
@@ -48,4 +53,9 @@ const _$RequestTypeEnumMap = {
   RequestType.date: 'date',
   RequestType.time: 'time',
   RequestType.dateAndTime: 'dateAndTime',
+};
+
+const _$ButtonsAlignmentEnumMap = {
+  ButtonsAlignment.vertical: 'vertical',
+  ButtonsAlignment.horizontal: 'horizontal',
 };

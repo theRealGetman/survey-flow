@@ -24,6 +24,10 @@ InformationStep _$InformationStepFromJson(Map<String, dynamic> json) =>
           ? null
           : StepButton.fromJson(
               json['secondaryButton'] as Map<String, dynamic>),
+      buttonsAlignment: $enumDecodeNullable(
+              _$ButtonsAlignmentEnumMap, json['buttonsAlignment'],
+              unknownValue: ButtonsAlignment.vertical) ??
+          ButtonsAlignment.vertical,
     );
 
 Map<String, dynamic> _$InformationStepToJson(InformationStep instance) =>
@@ -35,4 +39,10 @@ Map<String, dynamic> _$InformationStepToJson(InformationStep instance) =>
       'image': instance.image,
       'primaryButton': instance.primaryButton,
       'secondaryButton': instance.secondaryButton,
+      'buttonsAlignment': _$ButtonsAlignmentEnumMap[instance.buttonsAlignment]!,
     };
+
+const _$ButtonsAlignmentEnumMap = {
+  ButtonsAlignment.vertical: 'vertical',
+  ButtonsAlignment.horizontal: 'horizontal',
+};

@@ -14,6 +14,7 @@ class SurveyRequestStep implements SurveyStep {
     this.primaryButton = const StepButton.next(),
     this.secondaryButton,
     this.backgroundImage,
+    this.buttonsAlignment = ButtonsAlignment.vertical,
   });
 
   @override
@@ -33,6 +34,10 @@ class SurveyRequestStep implements SurveyStep {
   final RequestType type;
   final StepButton primaryButton;
   final StepButton? secondaryButton;
+  @JsonKey(
+    unknownEnumValue: ButtonsAlignment.vertical,
+  )
+  final ButtonsAlignment buttonsAlignment;
 
   Map<String, dynamic> toJson() => _$SurveyRequestStepToJson(this);
 

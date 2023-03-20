@@ -69,6 +69,7 @@ class InformationStepWidget extends StatelessWidget {
           StepButtons(
             primaryButton: step.primaryButton,
             secondaryButton: step.secondaryButton,
+            buttonsAlignment: step.buttonsAlignment,
             onPressed: onPressed,
           ),
         ],
