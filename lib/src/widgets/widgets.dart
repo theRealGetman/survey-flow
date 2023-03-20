@@ -1,8 +1,6 @@
 library widgets;
 
 export 'components/background_step_image.dart';
-export 'components/primary_button.dart';
-export 'components/secondary_button.dart';
 export 'components/selection_option_widget.dart';
 export 'components/step_button_widget.dart';
 export 'components/step_buttons.dart';

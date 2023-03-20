@@ -81,7 +81,7 @@ class _MultiSelectStepWidgetState extends State<MultiSelectStepWidget> {
           SizedBox(
             height: SurveyFlowTheme.of(context).theme.dimens.optionItemsMargin,
           ),
-          PrimaryButton(
+          StepButtonWidget(
             stepButton: step.primaryButton,
             enabled: minimumItemsSelected,
             onPressed: _onPressed,

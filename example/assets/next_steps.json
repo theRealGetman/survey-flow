@@ -16,7 +16,8 @@
     "secondaryButton": {
       "action": "action:skip",
       "text": "Skip",
-      "style": "secondary"
+      "style": "text",
+      "type": "secondary"
     }
   }
 ]

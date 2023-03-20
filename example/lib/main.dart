@@ -423,7 +423,7 @@ class CustomStepWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              PrimaryButton(
+              StepButtonWidget(
                 stepButton: const StepButton.next(),
                 onPressed: onPressed,
               ),

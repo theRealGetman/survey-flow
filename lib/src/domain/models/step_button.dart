@@ -8,7 +8,8 @@ class StepButton {
   const StepButton({
     required this.action,
     required this.text,
-    this.style = StepButtonStyle.primary,
+    this.style = StepButtonStyle.elevated,
+    this.type = StepButtonType.primary,
     this.id,
     this.predicate,
     this.navigationConditions,
@@ -17,7 +18,8 @@ class StepButton {
   const StepButton.next({
     this.id,
     this.text = 'Next',
-    this.style = StepButtonStyle.primary,
+    this.style = StepButtonStyle.elevated,
+    this.type = StepButtonType.primary,
     this.predicate,
     this.navigationConditions,
   }) : action = StepActions.next;
@@ -25,7 +27,8 @@ class StepButton {
   const StepButton.skip({
     this.id,
     this.text = 'Skip',
-    this.style = StepButtonStyle.secondary,
+    this.style = StepButtonStyle.text,
+    this.type = StepButtonType.secondary,
     this.predicate,
     this.navigationConditions,
   }) : action = StepActions.skip;
@@ -33,7 +36,8 @@ class StepButton {
   const StepButton.submit({
     this.id,
     this.text = 'Submit',
-    this.style = StepButtonStyle.primary,
+    this.style = StepButtonStyle.elevated,
+    this.type = StepButtonType.primary,
     this.predicate,
     this.navigationConditions,
   }) : action = StepActions.submit;
@@ -42,9 +46,13 @@ class StepButton {
   final String text;
   final String action;
   @JsonKey(
-    unknownEnumValue: StepButtonStyle.primary,
+    unknownEnumValue: StepButtonStyle.elevated,
   )
   final StepButtonStyle style;
+  @JsonKey(
+    unknownEnumValue: StepButtonType.primary,
+  )
+  final StepButtonType type;
 
   /// if request screen value matches pattern, primary button would be enabled
   final ButtonPredicate? predicate;
@@ -77,4 +85,6 @@ class StepButton {
       navigationConditions.hashCode;
 }
 
-enum StepButtonStyle { primary, secondary }
+enum StepButtonType { primary, secondary }
+
+enum StepButtonStyle { elevated, outlined, text }

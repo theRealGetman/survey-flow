@@ -32,7 +32,7 @@ class UnknownStepWidget extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          PrimaryButton(
+          StepButtonWidget(
             stepButton: const StepButton.skip(),
             onPressed: onPressed,
           ),
