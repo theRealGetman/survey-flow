@@ -17,5 +17,5 @@
 10) [x] Primary button disabled predicate for RequestScreens
 11) [x] Custom next step navigation
 12) [x] Button navigation conditions
-13) [ ] Buttons alignment (horizontal / vertical)
-14) [ ] BottomSheet view
+13) [x] Buttons alignment (horizontal / vertical)
+14) [x] BottomSheet view

@@ -13,11 +13,13 @@ class UnknownStepWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isModal = SurveyFlowTheme.of(context).theme.isModal;
     return StepContainer(
       step: step,
       child: Column(
+        mainAxisSize: isModal ? MainAxisSize.min : MainAxisSize.max,
         children: [
-          const Spacer(),
+          if (!isModal) const Spacer(),
           Text(
             'There is no predefined widget for ${step.runtimeType}',
             textAlign: TextAlign.center,
@@ -31,7 +33,7 @@ class UnknownStepWidget extends StatelessWidget {
               style: SurveyFlowTheme.of(context).theme.textStyles.description,
             ),
           ),
-          const Spacer(),
+          if (isModal) const SizedBox(height: 24.0) else const Spacer(),
           StepButtonWidget(
             stepButton: const StepButton.skip(),
             onPressed: onPressed,

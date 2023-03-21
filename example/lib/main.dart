@@ -57,60 +57,103 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: SurveyFlow(
-        backgroundImage: const StepImage.svg(
-          'assets/badge.svg',
-          source: StepImageSource.local,
-          position: ImagePosition(right: 0.0, top: 0.0),
-        ),
-        themeData: customTheme,
-        initialSteps: initialSteps ??
-            const [
-              Mocks.informationStep,
-              Mocks.informationStepWithImage,
-              Mocks.singleSelect,
-              Mocks.multiSelect,
-              Mocks.numberRequestStep,
-              Mocks.textRequestStep,
-              Mocks.timeRequestStep,
-              Mocks.dateRequestStep,
-              Mocks.dateAndTimeRequestStep,
-              Mocks.customStep,
-            ],
-        actionHandler: {
-          'action:notificationsPermission': ([StepResult? result]) async {
-            print('REQUEST NOTIFICATION PERMISSION');
-            await Future.delayed(Duration(seconds: 2));
-            return StepActions.next;
+      home: Builder(builder: (context) {
+        return SurveyFlow(
+          backgroundImage: const StepImage.svg(
+            'assets/badge.svg',
+            source: StepImageSource.local,
+            position: ImagePosition(right: 0.0, top: 0.0),
+          ),
+          themeData: customTheme,
+          initialSteps: initialSteps ??
+              const [
+                Mocks.informationStep,
+                Mocks.informationStepWithImage,
+                Mocks.singleSelect,
+                Mocks.multiSelect,
+                Mocks.numberRequestStep,
+                Mocks.textRequestStep,
+                Mocks.timeRequestStep,
+                Mocks.dateRequestStep,
+                Mocks.dateAndTimeRequestStep,
+                Mocks.customStep,
+              ],
+          actionHandler: {
+            'action:notificationsPermission': ([StepResult? result]) async {
+              print('REQUEST NOTIFICATION PERMISSION');
+              await Future.delayed(Duration(seconds: 2));
+              return StepActions.next;
+            },
+            'action:showBottomSheetSurvey': ([StepResult? result]) async {
+              print('showBottomSheetSurvey');
+              await _showModalSurvey(context);
+              return StepActions.next;
+            },
           },
+          widgetHandler: (
+            BuildContext context,
+            SurveyStep step,
+            ButtonPressedCallback onPressed,
+          ) {
+            if (step is CustomSurveyStep) {
+              return CustomStepWidget(
+                step: step,
+                onPressed: onPressed,
+              );
+            }
+            return null;
+          },
+          onSubmit: (results) async {
+            print('>>> SUBMIT $results');
+            await Future.delayed(const Duration(seconds: 3));
+            return nextSteps ??
+                [
+                  Mocks.informationStepWithLottie,
+                  // Mocks.multiSelect,
+                  // Mocks.dateRequestStep,
+                ];
+          },
+          onFinish: () {
+            print('>>> FINISHED');
+          },
+        );
+      }),
+    );
+  }
+
+  Future<void> _showModalSurvey(BuildContext context) {
+    return showModalSurveyFlow(
+      context: context,
+      initialSteps: [
+        Mocks.informationStep,
+        Mocks.informationStepWithImage,
+        Mocks.singleSelect,
+        Mocks.multiSelect,
+        Mocks.numberRequestStep,
+        Mocks.textRequestStep,
+        Mocks.timeRequestStep,
+        Mocks.dateRequestStep,
+        Mocks.dateAndTimeRequestStep,
+        Mocks.customStep,
+      ],
+      onSubmit: (results) async {
+        print('>>> MODAL SUBMIT $results');
+        await Future.delayed(const Duration(seconds: 3));
+        return [
+          // Mocks.informationStepWithLottie,
+        ];
+      },
+      actionHandler: {
+        'action:notificationsPermission': ([StepResult? result]) async {
+          print('REQUEST NOTIFICATION PERMISSION');
+          await Future.delayed(Duration(seconds: 2));
+          return StepActions.next;
         },
-        widgetHandler: (
-          BuildContext context,
-          SurveyStep step,
-          ButtonPressedCallback onPressed,
-        ) {
-          if (step is CustomSurveyStep) {
-            return CustomStepWidget(
-              step: step,
-              onPressed: onPressed,
-            );
-          }
-          return null;
-        },
-        onSubmit: (results) async {
-          print('>>> SUBMIT $results');
-          await Future.delayed(const Duration(seconds: 3));
-          return nextSteps ??
-              [
-                Mocks.informationStepWithLottie,
-                // Mocks.multiSelect,
-                // Mocks.dateRequestStep,
-              ];
-        },
-        onFinish: () {
-          print('>>> FINISHED');
-        },
-      ),
+      },
+      onFinish: () {
+        Navigator.of(context).pop();
+        print('>>> MODAL FINISHED');
+      },
     );
   }
 
@@ -250,9 +293,15 @@ class Mocks {
     description: 'Bla bla bla description for this step',
     options: [
       SelectOption(
-        text: 'Option 1',
-        description: 'Option description',
+        text: 'Custom navigation option',
+        description:
+            'If you select this option number_request_step would be opened next',
         value: 'option_1',
+        navigationConditions: [
+          ButtonNavigationCondition(
+            nextStepId: 'number_request_step',
+          ),
+        ],
       ),
       SelectOption(
         text: 'Notification permission',
@@ -301,6 +350,7 @@ class Mocks {
   );
 
   static const NumberRequestStep numberRequestStep = NumberRequestStep(
+    id: 'number_request_step',
     title: 'Number request title',
     description: 'Bla bla bla description for this step',
     hint: 'Your age',

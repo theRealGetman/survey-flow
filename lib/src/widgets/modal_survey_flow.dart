@@ -1,15 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:survey_flow/survey_flow.dart';
 
-class SurveyFlow extends StatefulWidget {
-  const SurveyFlow({
+Future<void> showModalSurveyFlow({
+  required BuildContext context,
+  required List<SurveyStep> initialSteps,
+  required VoidCallback onFinish,
+  Future<List<SurveyStep>> Function(List<StepResult> results)? onSubmit,
+  Map<String, CustomActionCallback>? actionHandler,
+  CustomWidgetBuilder? widgetHandler,
+  SurveyFlowThemeData themeData = const SurveyFlowThemeData(isModal: true),
+}) {
+  if (initialSteps.isEmpty) {
+    return Future.value();
+  }
+  return Navigator.of(context, rootNavigator: true).push(
+    PageRouteBuilder(
+      opaque: false,
+      pageBuilder: (_, __, ___) => _ModalSurveyFlow(
+        initialSteps: initialSteps,
+        onFinish: onFinish,
+        onSubmit: onSubmit,
+        themeData: themeData,
+        actionHandler: actionHandler,
+        widgetHandler: widgetHandler,
+      ),
+    ),
+  );
+}
+
+class _ModalSurveyFlow extends StatefulWidget {
+  const _ModalSurveyFlow({
     Key? key,
     required this.initialSteps,
     required this.onFinish,
     this.actionHandler,
     this.onSubmit,
     this.themeData = const SurveyFlowThemeData(),
-    this.backgroundImage,
     this.widgetHandler,
   }) : super(key: key);
 
@@ -22,16 +49,15 @@ class SurveyFlow extends StatefulWidget {
   final Future<List<SurveyStep>> Function(List<StepResult> results)? onSubmit;
   final VoidCallback onFinish;
   final SurveyFlowThemeData themeData;
-  final StepImage? backgroundImage;
 
   @override
-  State<SurveyFlow> createState() => _SurveyFlowState();
+  State<_ModalSurveyFlow> createState() => _ModalSurveyFlowState();
 }
 
-class _SurveyFlowState extends State<SurveyFlow> {
-  final PageController _controller = PageController();
+class _ModalSurveyFlowState extends State<_ModalSurveyFlow> {
   List<SurveyStep> steps = [];
   List<StepResult> results = [];
+  int _currentStep = 0;
 
   @override
   void initState() {
@@ -41,28 +67,50 @@ class _SurveyFlowState extends State<SurveyFlow> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return SurveyFlowTheme(
-      theme: widget.themeData,
-      child: Builder(builder: (context) {
-        return Scaffold(
-          backgroundColor: SurveyFlowTheme.of(context).theme.colors.background,
-          body: Stack(
-            children: [
-              if (widget.backgroundImage != null)
-                BackgroundStepImage(image: widget.backgroundImage!),
-              PageView.builder(
-                controller: _controller,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: steps.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return _mapStep(context, steps[index]);
-                },
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    SchedulerBinding.instance
+        .addPostFrameCallback((_) => _show(context, steps.first));
+  }
+
+  Future<void> _show(BuildContext context, SurveyStep step) async {
+    final result = await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(widget.themeData.modalStyle.borderRadius),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SurveyFlowTheme(
+          theme: widget.themeData,
+          child: Builder(builder: (context) {
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(SurveyFlowTheme.of(context)
+                      .theme
+                      .modalStyle
+                      .borderRadius),
+                ),
               ),
-            ],
-          ),
+              child: _mapStep(context, step),
+            );
+          }),
         );
-      }),
+      },
+    );
+    if (result == null) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.transparent,
     );
   }
 
@@ -118,8 +166,7 @@ class _SurveyFlowState extends State<SurveyFlow> {
     if (result != null && action != StepActions.skip) {
       results.add(result);
     }
-    if (action == StepActions.submit ||
-        _controller.page?.toInt() == steps.length - 1) {
+    if (action == StepActions.submit || _currentStep == steps.length - 1) {
       bool shouldFinish = true;
       // last page, so we need to submit
       if (widget.onSubmit != null) {
@@ -141,12 +188,8 @@ class _SurveyFlowState extends State<SurveyFlow> {
         final int nextStepIndex =
             steps.indexWhere((SurveyStep step) => step.id == nextStepId);
         if (nextStepIndex > -1) {
-          _controller.jumpToPage(nextStepIndex - 1);
-          _controller.animateToPage(
-            nextStepIndex,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeIn,
-          );
+          _currentStep = nextStepIndex;
+          _openNextStep();
           return;
         }
       }
@@ -155,11 +198,14 @@ class _SurveyFlowState extends State<SurveyFlow> {
       case StepActions.submit:
       case StepActions.next:
       case StepActions.skip:
-        _controller.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeIn,
-        );
+        _currentStep++;
+        _openNextStep();
         return;
     }
+  }
+
+  void _openNextStep() {
+    Navigator.of(context).pop(true);
+    _show(context, steps[_currentStep]);
   }
 }

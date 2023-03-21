@@ -30,11 +30,13 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isModal = SurveyFlowTheme.of(context).theme.isModal;
     return StepContainer(
       step: step,
       child: Column(
+        mainAxisSize: isModal ? MainAxisSize.min : MainAxisSize.max,
         children: [
-          const Spacer(),
+          if (!isModal) const Spacer(),
           Row(
             children: [
               Expanded(
@@ -80,8 +82,8 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
             child: GestureDetector(
               onTap: !isLoading
                   ? () {
-                      _showDatePicker(context);
-                    }
+                _showDatePicker(context);
+              }
                   : null,
               child: AbsorbPointer(
                 absorbing: isDatePicker,
@@ -92,7 +94,7 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
                   controller: _controller,
                   keyboardType: textInputType,
                   textAlign:
-                      SurveyFlowTheme.of(context).theme.inputStyles.textAlign,
+                  SurveyFlowTheme.of(context).theme.inputStyles.textAlign,
                   onTapOutside: (_) {
                     FocusScope.of(context).unfocus();
                   },
@@ -103,7 +105,7 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
               ),
             ),
           ),
-          const Spacer(),
+          if (isModal) const SizedBox(height: 24.0) else const Spacer(),
           StepButtons(
             stepValue: _controller.text,
             primaryButton: step.primaryButton,
@@ -111,6 +113,7 @@ class _DataRequestStepWidgetState extends State<DataRequestStepWidget> {
             buttonsAlignment: step.buttonsAlignment,
             onPressed: _onPressed,
           ),
+          SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
         ],
       ),
     );

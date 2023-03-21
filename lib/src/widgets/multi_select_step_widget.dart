@@ -31,11 +31,13 @@ class _MultiSelectStepWidgetState extends State<MultiSelectStepWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isModal = SurveyFlowTheme.of(context).theme.isModal;
     return StepContainer(
       step: step,
       child: Column(
+        mainAxisSize: isModal ? MainAxisSize.min : MainAxisSize.max,
         children: [
-          const Spacer(),
+          if (!isModal) const Spacer(),
           Row(
             children: [
               Expanded(
@@ -76,7 +78,7 @@ class _MultiSelectStepWidgetState extends State<MultiSelectStepWidget> {
                 ),
               ],
             ),
-          const Spacer(),
+          if (isModal) const SizedBox(height: 24.0) else const Spacer(),
           _options(context),
           SizedBox(
             height: SurveyFlowTheme.of(context).theme.dimens.optionItemsMargin,

@@ -11,7 +11,7 @@
       "width": 0.3
     },
     "primaryButton": {
-      "action": "action:notificationsPermission",
+      "action": "action:showBottomSheetSurvey",
       "text": "Next"
     }
   },

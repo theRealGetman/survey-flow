@@ -10,6 +10,7 @@ export 'components/step_image_widget.dart';
 export 'components/step_progress_indicator.dart';
 export 'data_request_step_widget.dart';
 export 'information_step_widget.dart';
+export 'modal_survey_flow.dart';
 export 'multi_select_step_widget.dart';
 export 'single_select_step_widget.dart';
 export 'survey_flow.dart';

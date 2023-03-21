@@ -5,6 +5,7 @@ part 'button_style.dart';
 part 'colors.dart';
 part 'dimens.dart';
 part 'input_style.dart';
+part 'modal_style.dart';
 part 'text_style.dart';
 
 class SurveyFlowThemeData {
@@ -14,6 +15,8 @@ class SurveyFlowThemeData {
     this.textStyles = const SFTextStyles(),
     this.buttonStyles = const SFButtonStyles(),
     this.inputStyles = const SFInputStyles(),
+    this.modalStyle = const SFModalStyle(),
+    this.isModal = false,
   });
 
   final SFDimens dimens;
@@ -21,6 +24,8 @@ class SurveyFlowThemeData {
   final SFTextStyles textStyles;
   final SFButtonStyles buttonStyles;
   final SFInputStyles inputStyles;
+  final SFModalStyle modalStyle;
+  final bool isModal;
 }
 
 class SurveyFlowTheme extends InheritedWidget {
