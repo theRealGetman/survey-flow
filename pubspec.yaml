@@ -1,6 +1,6 @@
 name: survey_flow
 description: Onboarding/Survey flow manager for Flutter
-version: 0.0.1
+version: 0.1.0
 
 environment:
   sdk: '>=2.19.0 <3.0.0'

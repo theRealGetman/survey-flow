@@ -1,4 +1,21 @@
-### Todo:
+# Survey flow for Flutter
+
+![License: MIT](https://img.shields.io/badge/Licence-MIT-success.svg)
+
+SurveyFlow package aims to simplify the process of building surveys in Flutter applications and provide a customizable
+solution for capturing user feedback.
+Inspired by [survey_kit](https://pub.dev/packages/survey_kit).
+
+# Example
+
+###### Custom design + bottom sheet
+
+<p align="center">
+<img src="https://github.com/quickbirdstudios/survey_kit/blob/main/example/assets/survey-kit-demo.gif?raw=true" width="350">
+</p>
+
+### Features:
+
 1) [x] Submit steps result
 2) [x] Update steps list
 3) [x] Loading state
