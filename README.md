@@ -11,7 +11,7 @@ Inspired by [survey_kit](https://pub.dev/packages/survey_kit).
 ###### Custom design + bottom sheet
 
 <p align="center">
-<img src="https://github.com/quickbirdstudios/survey_kit/blob/main/example/assets/survey-kit-demo.gif?raw=true" width="350">
+<video src="https://github.com/theRealGetman/survey-flow/blob/master/example/assets/doc/example.mp4?raw=true" width="350"></video>
 </p>
 
 ### Features:
