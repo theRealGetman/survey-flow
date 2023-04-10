@@ -2,9 +2,7 @@
 
 ![License: MIT](https://img.shields.io/badge/Licence-MIT-success.svg)
 
-Survey Flow is a Flutter package that provides a framework for creating surveys or quizzes within your app. It allows
-you to easily define a survey's structure and customize its appearance, and it includes a range of pre-built widgets to
-help you display questions and collect user responses.
+Survey Flow is a Flutter package that provides a framework for creating surveys or quizzes within your app. It allows you to easily define a survey's structure and customize its appearance, and it includes a range of pre-built widgets to help you display questions and collect user responses.
 
 Inspired by [survey_kit](https://pub.dev/packages/survey_kit).
 
@@ -17,31 +15,28 @@ Inspired by [survey_kit](https://pub.dev/packages/survey_kit).
 <video src="https://user-images.githubusercontent.com/12810748/226890839-3e408343-7148-4a01-b59b-705d7de9ebb2.mp4" width="350"></video>
 </p>
 
+
 ## Installation
 
 To use Survey Flow in your Flutter app, add it to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-   survey_flow: ^latest_version
+  survey_flow: ^latest_version
 ```
-
 Then, run `flutter pub get` to download the package.
 
 # Usage
 
 To use Survey Flow, import the package in your Dart code:
-
 ```dart
 import 'package:survey_flow/survey_flow.dart';
 ```
 
 ## Creating a Survey
-
 To create a survey, use the one of the `SurveyStep` classes or create your own:
 
 ```dart
-
 final List<SurveyStep> steps = [
    InformationStep(
       title: 'Information title',
@@ -60,11 +55,9 @@ final List<SurveyStep> steps = [
 ```
 
 Predefined step types and components documentation you can find below.
-More examples you can find in
-this [Example repository](https://github.com/theRealGetman/survey-flow/tree/master/example).
+More examples you can find in this [Example repository](https://github.com/theRealGetman/survey-flow/tree/master/example).
 
 ## Displaying a Survey
-
 To display a survey, use the `SurveyFlow` widget:
 
 ```dart
@@ -93,23 +86,17 @@ class _MySurveyScreenState extends State<MySurveyScreen> {
    }
 }
 ```
-
-In this example, we've created a screen that displays a `SurveyFlow` widget with our `SurveyStep`s, an `onSubmit`
-callback that will be called when user submits the last step or some step has a `submit` action (you can find how
-actions works in the documentation below) and `onFinish` callback that will be called when the user completes the
-survey.
+In this example, we've created a screen that displays a `SurveyFlow` widget with our `SurveyStep`s, an `onSubmit` callback that will be called when user submits the last step or some step has a `submit` action (you can find how actions works in the documentation below) and `onFinish` callback that will be called when the user completes the survey.
 
 ## Displaying a modal Survey
-
 To display a modal survey, use the `showModalSurveyFlow` function:
 
 ```dart
-
 final List<SurveyStep> survey = // create your survey here
 
 showModalSurveyFlow(
    context: context,
-   initialSteps: survey,
+   initialSteps: survey, 
    onSubmit: (results) {
       // handle the survey results here
    },
@@ -122,35 +109,22 @@ showModalSurveyFlow(
 ## Predefined step types:
 
 ### `InformationStep`
-
 <p align="center">
 <img src="doc/information.png" width="320"></img>
 </p>
 
 ```dart
-InformationStep
-(
-title: '
-Information title
-'
-,
-description: '
-Bla bla bla description for this step
-'
-,
-image: StepImage.svg('
-https://www.svgrepo.com/show/24762/round-done-button.svg
-'
-,
-source: StepImageSource.network,width: 0.3
-,
-)
-,
-primaryButton: StepButton.next()
-,
+InformationStep(
+   title: 'Information title',
+   description: 'Bla bla bla description for this step',
+   image: StepImage.svg(
+      'https://www.svgrepo.com/show/24762/round-done-button.svg',
+      source: StepImageSource.network,
+      width: 0.3,
+   ),
+   primaryButton: StepButton.next(),
 );
 ```
-
 | Parameter                               |          Default          | Description                                                                        |
 |:----------------------------------------|:-------------------------:|:-----------------------------------------------------------------------------------|
 | **id** *String?*                        |           Null            | Step id. Can be used for custom steps navigation.                                  |
@@ -161,6 +135,7 @@ primaryButton: StepButton.next()
 | **primaryButton** *StepButton*          |     StepButton.next()     | Primary button with step action. Read more about `StepButton` below.               |
 | **secondaryButton** *StepButton?*       |           Null            | Secondary button with step action. Read more about `StepButton` below.             |
 | **buttonsAlignment** *ButtonsAlignment* | ButtonsAlignment.vertical | Defines how buttons should be aligned - vertically or horizontally.                |
+
 
 ### Features:
 
@@ -186,7 +161,6 @@ primaryButton: StepButton.next()
 14) [x] BottomSheet view
 
 # Contributing
-
 Feel free to contact me (a.e.getman@gmail.com) or create Pull Requests/Issues for this repository :)
 
 # License
