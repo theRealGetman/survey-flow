@@ -136,6 +136,314 @@ InformationStep(
 | **secondaryButton** *StepButton?*       |           Null            | Secondary button with step action. Read more about `StepButton` below.             |
 | **buttonsAlignment** *ButtonsAlignment* | ButtonsAlignment.vertical | Defines how buttons should be aligned - vertically or horizontally.                |
 
+### `SingleSelectStep`
+<p align="center">
+<img src="doc/single-select.png" width="320"></img>
+</p>
+
+```dart
+SingleSelectStep(
+  title: 'Select one option to move forward',
+  description: 'Bla bla bla description for this step',
+  options: [
+     SelectOption(
+        text: 'Custom navigation option',
+        description:
+        'If you select this option number_request_step would be opened next',
+        value: 'option_1',
+        navigationConditions: [
+           ButtonNavigationCondition(
+            nextStepId: 'number_request_step',
+           ),
+        ],
+    ),
+     SelectOption(
+        text: 'Notification permission',
+        value: 'option_2',
+        action: 'action:notificationsPermission',
+     ),
+     SelectOption(
+        text: 'Option 3',
+        description:
+        'Option long description that should take at least two rows',
+        value: 'option_3',
+     ),
+     SelectOption(
+        text: 'Option 4',
+        value: 'option_4',
+     ),
+  ],
+);
+
+```
+| Parameter                        | Default  | Description                                                                        |
+|:---------------------------------|:--------:|:-----------------------------------------------------------------------------------|
+| **id** *String?*                 |   Null   | Step id. Can be used for custom steps navigation.                                  |
+| **title** *String*               | required | Title that will be displayed on the step.                                          |
+| **options** *List<SelectOption>* | required | Options list. Read more about `SelectOption` below.                                |
+| **description** *String?*        |   Null   | Description that will be displayed on the step.                                    |
+| **backgroundImage** *StepImage?* |   Null   | Image that will be displayed on the background. Read more about `StepImage` below. |
+
+### `MultiSelectStep`
+<p align="center">
+<img src="doc/multi-select.png" width="320"></img>
+</p>
+
+```dart
+MultiSelectStep(
+   title: 'Select from 1 to 2 options to move forward',
+   description: 'Bla bla bla description for this step',
+   minimumAmountOfOptionsSelected: 1,
+   maximumAmountOfOptionsSelected: 2,
+   options: [
+      SelectOption(
+         text: 'Option 1',
+         description: 'Option description',
+         value: 'option_1',
+      ),
+      SelectOption(
+         text: 'Option 2',
+         value: 'option_2',
+      ),
+      SelectOption(
+         text: 'Option 3',
+         description:
+         'Option long description that should take at least two rows',
+         value: 'option_3',
+      ),
+      SelectOption(
+         text: 'Option 4',
+         value: 'option_4',
+      ),
+   ],
+);
+
+```
+| Parameter                                 |      Default      | Description                                                                        |
+|:------------------------------------------|:-----------------:|:-----------------------------------------------------------------------------------|
+| **id** *String?*                          |       Null        | Step id. Can be used for custom steps navigation.                                  |
+| **title** *String*                        |     required      | Title that will be displayed on the step.                                          |
+| **options** *List<SelectOption>*          |     required      | Options list. Read more about `SelectOption` below.                                |
+| **description** *String?*                 |       Null        | Description that will be displayed on the step.                                    |
+| **backgroundImage** *StepImage?*          |       Null        | Image that will be displayed on the background. Read more about `StepImage` below. |
+| **primaryButton** *StepButton*            | StepButton.next() | Primary button with step action. Read more about `StepButton` below.               |
+| **minimumAmountOfOptionsSelected** *int?* |       Null        | Number of minimum options selected to enable the button.                           |
+| **maximumAmountOfOptionsSelected** *int?* |       Null        | Number of maximum options selected.                                                |
+
+### `NumberRequestStep`
+<p align="center">
+<img src="doc/number-request.png" width="320"></img>
+</p>
+
+```dart
+NumberRequestStep(
+   id: 'number_request_step',
+   title: 'Number request title',
+   description: 'Bla bla bla description for this step',
+   hint: 'Your age',
+   primaryButton: StepButton.next(
+      predicate: ButtonPredicate.moreThan(18),
+   ),
+   secondaryButton: StepButton.skip(),
+);
+```
+
+| Parameter                                      |          Default          | Description                                                                        |
+|:-----------------------------------------------|:-------------------------:|:-----------------------------------------------------------------------------------|
+| **id** *String?*                               |           Null            | Step id. Can be used for custom steps navigation.                                  |
+| **title** *String*                             |         required          | Title that will be displayed on the step.                                          |
+| **description** *String?*                      |           Null            | Description that will be displayed on the step.                                    |
+| **primaryButton** *StepButton*                 |     StepButton.next()     | Primary button with step action. Read more about `StepButton` below.               |
+| **secondaryButton** *StepButton?*              |           Null            | Secondary button with step action. Read more about `StepButton` below.             |
+| **buttonsAlignment** *ButtonsAlignment*        | ButtonsAlignment.vertical | Defines how buttons should be aligned - vertically or horizontally.                |
+| **backgroundImage** *StepImage?*               |           Null            | Image that will be displayed on the background. Read more about `StepImage` below. |
+| **hint** *String?*                             |           Null            | Text field hint.                                                                   |
+| **type** *RequestType*                         |   RequestType.numberInt   | Requested data type. Read more `RequestType` values below.                         |
+
+### `TextRequestStep`
+<p align="center">
+<img src="doc/text-request.png" width="320"></img>
+</p>
+
+```dart
+TextRequestStep(
+   title: 'Text request title',
+   description: 'Bla bla bla description for this step',
+   hint: 'Your name',
+   primaryButton: StepButton.next(),
+   secondaryButton: StepButton.skip(),
+);
+```
+
+| Parameter                                      |          Default          | Description                                                                        |
+|:-----------------------------------------------|:-------------------------:|:-----------------------------------------------------------------------------------|
+| **id** *String?*                               |           Null            | Step id. Can be used for custom steps navigation.                                  |
+| **title** *String*                             |         required          | Title that will be displayed on the step.                                          |
+| **description** *String?*                      |           Null            | Description that will be displayed on the step.                                    |
+| **primaryButton** *StepButton*                 |     StepButton.next()     | Primary button with step action. Read more about `StepButton` below.               |
+| **secondaryButton** *StepButton?*              |           Null            | Secondary button with step action. Read more about `StepButton` below.             |
+| **buttonsAlignment** *ButtonsAlignment*        | ButtonsAlignment.vertical | Defines how buttons should be aligned - vertically or horizontally.                |
+| **backgroundImage** *StepImage?*               |           Null            | Image that will be displayed on the background. Read more about `StepImage` below. |
+| **hint** *String?*                             |           Null            | Text field hint.                                                                   |
+| **type** *RequestType*                         |     RequestType.text      | Requested data type. Read more `RequestType` values below.                         |
+
+### `DateRequestStep`
+<p align="center">
+<img src="doc/date-request.png" width="320"></img>
+<img src="doc/time-request.png" width="320"></img>
+</p>
+
+```dart
+DateRequestStep(
+   title: 'Date request title',
+   description: 'Bla bla bla description for this step',
+   hint: 'Your date of birth',
+   primaryButton: StepButton.next(),
+);
+```
+
+| Parameter                               |          Default          | Description                                                                           |
+|:----------------------------------------|:-------------------------:|:--------------------------------------------------------------------------------------|
+| **id** *String?*                        |           Null            | Step id. Can be used for custom steps navigation.                                     |
+| **title** *String*                      |         required          | Title that will be displayed on the step.                                             |
+| **description** *String?*               |           Null            | Description that will be displayed on the step.                                       |
+| **primaryButton** *StepButton*          |     StepButton.next()     | Primary button with step action. Read more about `StepButton` below.                  |
+| **secondaryButton** *StepButton?*       |           Null            | Secondary button with step action. Read more about `StepButton` below.                |
+| **buttonsAlignment** *ButtonsAlignment* | ButtonsAlignment.vertical | Defines how buttons should be aligned - vertically or horizontally.                   |
+| **backgroundImage** *StepImage?*        |           Null            | Image that will be displayed on the background. Read more about `StepImage` below.    |
+| **hint** *String?*                      |           Null            | Text field hint.                                                                      |
+| **dateFormat** *String?*                |           Null            | Default 'd MMMM yyyy' for date, 'hh:mm' for time and 'd MMM yyyy hh:mm' for datetime. |
+| **type** *RequestType*                  |     RequestType.date      | Requested data type. Read more `RequestType` values below.                            |
+
+### `Custom Step`
+
+```dart
+class CustomSurveyStep implements SurveyStep {
+   const CustomSurveyStep({
+      required this.id,
+      required this.title,
+      required this.description,
+      required this.primaryButton,
+      required this.image,
+      this.backgroundImage,
+   });
+
+   @override
+   final String id;
+
+   @override
+   final String title;
+
+   @override
+   final String description;
+
+   @override
+   final StepImage? backgroundImage;
+
+   final StepImage image;
+   final StepButton primaryButton;
+}
+```
+You can create your own step by inheriting from SurveyStep and add you custom widget handler for it. Only imagination is your limit ☺️
+
+### `RequestType`
+
+```dart
+enum RequestType {
+  text,
+  textMultiline,
+  name,
+  email,
+  numberInt,
+  numberDouble,
+  date,
+  time,
+  dateAndTime,
+}
+```
+
+### `StepButton`
+
+| Parameter                                                   |         Default          | Description                                                                                                                          |
+|:------------------------------------------------------------|:------------------------:|:-------------------------------------------------------------------------------------------------------------------------------------|
+| **id** *String?*                                            |           Null           | Button id.                                                                                                                           |
+| **text** *String*                                           |         required         | Button title.                                                                                                                        |
+| **action** *String*                                         |         required         | Button action. What should be done when user clicks on the button. You can find few default actions in `StepActions`.                |
+| **style** *StepButtonStyle*                                 | StepButtonStyle.elevated | Button style elevated, outlined or text. Widget styles could be defined using `SurveyFlowThemeData` in `SurveyFlow`.                 |
+| **type** *StepButtonType*                                   |  StepButtonType.primary  | Button type primary or secondary. Widget styles could be defined using `SurveyFlowThemeData` in `SurveyFlow`.                        |
+| **navigationConditions** *List<ButtonNavigationCondition>?* |           Null           | Navigation conditions that would define where should we navigate on button click. Read more about `ButtonNavigationCondition` below. |
+| **predicate** *ButtonPredicate?*                            |           Null           | Predicate that will define when button should be enabled or disabled. Read more about `ButtonPredicate` below.                       |
+
+```dart
+enum StepButtonType { primary, secondary }
+```
+```dart
+enum StepButtonStyle { elevated, outlined, text }
+```
+
+### `ButtonPredicate`
+Is used to define when button should be enabled or disabled. Works by default on **Request** steps.
+
+For example, if you want button to be enabled on the **NumberRequestScreen** only if provided number is more than 18, you should use predicate like:
+
+```dart
+ButtonPredicate.moreThan(18);
+```
+
+| Parameter                       | Default  | Description                                           |
+|:--------------------------------|:--------:|:------------------------------------------------------|
+| **type** *ButtonPredicateType*  | required | Predicate type. You can find enum values below.       |
+| **value** *dynamic*             |   Null   | Value which be used to compare depending on the type. |
+
+```dart
+enum ButtonPredicateType {
+   notEmpty,
+   lengthMoreThan,
+   matches,
+   equals,
+   lessThan,
+   moreThan,
+}
+```
+
+### `ButtonNavigationCondition`
+Is used to define where used should be navigated on button click. Can have many conditions with different step ids.
+
+For example, if you want to navigate to step with id 'my_step_id' only if provided number is more than 18, you should use navigation condition like:
+
+```dart
+ButtonNavigationCondition.moreThan('my_step_id', 18);
+```
+
+| Parameter                                |                Default                 | Description                                                |
+|:-----------------------------------------|:--------------------------------------:|:-----------------------------------------------------------|
+| **type** *ButtonNavigationConditionType* | ButtonNavigationConditionType.nextStep | Navigation condition type. You can find enum values below. |
+| **nextStepId** *String*                  |                required                | Id of the step that should be opened.                      |
+| **value** *dynamic*                      |                  Null                  | Value which be used to compare depending on the type.      |
+
+```dart
+enum ButtonNavigationConditionType {
+   nextStep,
+   notEmpty,
+   lengthMoreThan,
+   matches,
+   equals,
+   lessThan,
+   moreThan,
+}
+```
+
+### `SelectOption`
+Select option is child of `StepButton`, so `action` and `navigationConditions` works just the same way.
+
+| Parameter                                                   |     Default      | Description                                                                                                                          |
+|:------------------------------------------------------------|:----------------:|:-------------------------------------------------------------------------------------------------------------------------------------|
+| **id** *String?*                                            |       Null       | Button id.                                                                                                                           |
+| **text** *String*                                           |     required     | Button title.                                                                                                                        |
+| **value** *dynamic*                                         |     required     | Value of the option that will be stored as step result.                                                                              |
+| **description** *String?*                                   |       Null       | Description that will be displayed on the step.                                                                                      |
+| **action** *String*                                         | StepActions.next | Button action. What should be done when user clicks on the button. You can find few default actions in `StepActions`.                |
+| **navigationConditions** *List<ButtonNavigationCondition>?* |       Null       | Navigation conditions that would define where should we navigate on button click. Read more about `ButtonNavigationCondition` below. |
 
 ### Features:
 
