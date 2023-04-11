@@ -445,6 +445,42 @@ Select option is child of `StepButton`, so `action` and `navigationConditions` w
 | **action** *String*                                         | StepActions.next | Button action. What should be done when user clicks on the button. You can find few default actions in `StepActions`.                |
 | **navigationConditions** *List<ButtonNavigationCondition>?* |       Null       | Navigation conditions that would define where should we navigate on button click. Read more about `ButtonNavigationCondition` below. |
 
+### `StepImage`
+Image that can be displayed on the step or step background. Supports different sources (**local** or **network**) and image types (default images as **png**, **jpeg** etc., **svg** and **lottie** animations).
+
+```dart
+StepImage.svg(
+   'assets/badge.svg',
+   source: StepImageSource.local,
+   position: ImagePosition(right: 0.0, top: 0.0),
+)
+```
+
+| Parameter                     | Default  | Description                                                                  |
+|:------------------------------|:--------:|:-----------------------------------------------------------------------------|
+| **path** *String*             | required | Image path like url or local path.                                           |
+| **source** *StepImageSource*  | required | Image source local or network.                                               |
+| **type** *StepImageType*      | required | Image type image, svg or lottie.                                             |
+| **width** *double?*           |   Null   | Image width. If less than 1 will use that value as fraction of screen width. |
+| **height** *double?*          |   Null   | Image height.                                                                |
+| **position** *ImagePosition?* |   Null   | Position of image on the screen. Usually used to position background image.  |
+| **opacity** *double*          |   1.0    | Image opacity.                                                               |
+
+```dart
+enum StepImageSource {
+  local,
+  network,
+}
+```
+
+```dart
+enum StepImageType {
+   image,
+   svg,
+   lottie,
+}
+```
+
 ### Features:
 
 1) [x] Submit steps result
