@@ -187,6 +187,7 @@ SingleSelectStep(
 ### `MultiSelectStep`
 <p align="center">
 <img src="doc/multi-select.png" width="320"></img>
+<img src="doc/multi-select-2.png" width="320"></img>
 </p>
 
 ```dart
@@ -480,6 +481,9 @@ enum StepImageType {
    lottie,
 }
 ```
+
+### `SurveyFlowThemeData`
+You set your own style for the survey using `SurveyFlowThemeData` for `SurveyFlow` widget.
 
 ### Features:
 
