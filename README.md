@@ -485,6 +485,49 @@ enum StepImageType {
 ### `SurveyFlowThemeData`
 You set your own style for the survey using `SurveyFlowThemeData` for `SurveyFlow` widget.
 
+## Json Serialization
+You can use json to provide steps for your survey. Every model supports json serialization.
+
+#### That means that you can use Firebase Remote Config, local jsons, your own backend or any other service to dynamically change your survey without updating the application.
+
+```dart
+// if you have your own step, add converter to stepsConverters
+stepsConverters.addAll({
+  'customStep': (v) => CustomSurveyStep.fromJson(v),
+});
+
+final String initialStepsData = await rootBundle.loadString("assets/initial_steps.json");
+final List<dynamic> initialStepsDecoded = jsonDecode(initialStepsData);
+
+// use SurveyStepConverter to convert models from json
+// You can use this converter directly inside model with annotation.
+final List<SurveyStep> initialSteps = initialStepsDecoded
+        .map((e) =>
+            const SurveyStepConverter().fromJson(e as Map<String, dynamic>?))
+        .toList();
+```
+
+```json
+[
+   {
+      "id": "information_svg_step",
+      "stepType": "information",
+      "title": "Information title",
+      "description": "Bla bla bla description for this step",
+      "image": {
+         "path": "https://www.svgrepo.com/show/24762/round-done-button.svg",
+         "source": "network",
+         "type": "svg",
+         "width": 0.3
+      },
+      "primaryButton": {
+         "action": "action:showBottomSheetSurvey",
+         "text": "Next"
+      }
+   }
+]
+```
+
 ### Features:
 
 1) [x] Submit steps result
