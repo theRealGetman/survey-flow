@@ -102,7 +102,7 @@ class _ModalSurveyFlowState extends State<_ModalSurveyFlow> {
         );
       },
     );
-    if (result == null) {
+    if (result == null && context.mounted) {
       Navigator.of(context).pop();
     }
   }

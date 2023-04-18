@@ -99,7 +99,7 @@ Future<DateTime?> showPlatformDateAndTimePicker(
       firstDate: firstDate,
       lastDate: lastDate,
     );
-    if (date != null) {
+    if (date != null && context.mounted) {
       final TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(date),
@@ -130,15 +130,18 @@ Future<DateTime?> showPlatformDateAndTimePicker(
         },
       ),
     );
-    return _showCupertinoModalDialog(
-      context,
-      CupertinoDatePicker(
-        initialDateTime: initialDate,
-        mode: CupertinoDatePickerMode.time,
-        use24hFormat: true,
-        onDateTimeChanged: onDateTimeChanged,
-      ),
-    );
+    if (context.mounted) {
+      return _showCupertinoModalDialog(
+        context,
+        CupertinoDatePicker(
+          initialDateTime: initialDate,
+          mode: CupertinoDatePickerMode.time,
+          use24hFormat: true,
+          onDateTimeChanged: onDateTimeChanged,
+        ),
+      );
+    }
+    return null;
   } else {
     final DateTime? date = await showDatePicker(
       context: context,
@@ -146,7 +149,7 @@ Future<DateTime?> showPlatformDateAndTimePicker(
       firstDate: firstDate,
       lastDate: lastDate,
     );
-    if (date != null) {
+    if (date != null && context.mounted) {
       final TimeOfDay? time = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(date),
