@@ -3,7 +3,7 @@
 name: survey_flow
 description: Onboarding/Survey flow manager for Flutter
 repository: https://github.com/theRealGetman/survey-flow
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: '>=2.19.0 <3.0.0'

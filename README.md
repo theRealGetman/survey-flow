@@ -110,7 +110,7 @@ showModalSurveyFlow(
 
 ### `InformationStep`
 <p align="center">
-<img src="doc/information.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/information.png" width="320"></img>
 </p>
 
 ```dart
@@ -138,7 +138,7 @@ InformationStep(
 
 ### `SingleSelectStep`
 <p align="center">
-<img src="doc/single-select.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/single-select.png" width="320"></img>
 </p>
 
 ```dart
@@ -186,8 +186,8 @@ SingleSelectStep(
 
 ### `MultiSelectStep`
 <p align="center">
-<img src="doc/multi-select.png" width="320"></img>
-<img src="doc/multi-select-2.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/multi-select.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/multi-select-2.png" width="320"></img>
 </p>
 
 ```dart
@@ -233,7 +233,7 @@ MultiSelectStep(
 
 ### `NumberRequestStep`
 <p align="center">
-<img src="doc/number-request.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/number-request.png" width="320"></img>
 </p>
 
 ```dart
@@ -263,7 +263,7 @@ NumberRequestStep(
 
 ### `TextRequestStep`
 <p align="center">
-<img src="doc/text-request.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/text-request.png" width="320"></img>
 </p>
 
 ```dart
@@ -290,8 +290,8 @@ TextRequestStep(
 
 ### `DateRequestStep`
 <p align="center">
-<img src="doc/date-request.png" width="320"></img>
-<img src="doc/time-request.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/date-request.png" width="320"></img>
+<img src="https://raw.githubusercontent.com/theRealGetman/survey-flow/master/doc/time-request.png" width="320"></img>
 </p>
 
 ```dart
