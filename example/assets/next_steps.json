@@ -2,8 +2,8 @@
   {
     "id": "information_lottie_step",
     "stepType": "information",
-    "title": "Information title",
-    "description": "Bla bla bla description for this step",
+    "title": "Your survey is completed",
+    "description": "Thanks for answering the questions! See you soon",
     "image": {
       "path": "assets/lottie/task-completed.json",
       "source": "local",

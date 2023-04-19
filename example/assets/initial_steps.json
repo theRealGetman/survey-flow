@@ -2,8 +2,8 @@
   {
     "id": "information_svg_step",
     "stepType": "information",
-    "title": "Information title",
-    "description": "Bla bla bla description for this step",
+    "title": "Let's have a little survey",
+    "description": "Answer or skip questions, in the end your answers would be submitted",
     "image": {
       "path": "https://www.svgrepo.com/show/24762/round-done-button.svg",
       "source": "network",
@@ -18,8 +18,8 @@
   {
     "id": "information_image_step",
     "stepType": "information",
-    "title": "Information title",
-    "description": "Bla bla bla description for this step",
+    "title": "Let's have a little survey",
+    "description": "Answer or skip questions, in the end your answers would be submitted",
     "image": {
       "path": "https://icon-library.com/images/completed-icon/completed-icon-28.jpg"
     },
@@ -37,8 +37,8 @@
   {
     "id": "single_select_step",
     "stepType": "singleSelect",
-    "title": "Select one option to move forward",
-    "description": "Bla bla bla description for this step",
+    "title": "Select one option",
+    "description": "On this step you can select single answer to move forward",
     "options": [
       {
         "id": "option_id_1",
@@ -73,8 +73,8 @@
   {
     "id": "multi_select_step",
     "stepType": "multiSelect",
-    "title": "Select from 1 to 2 options to move forward",
-    "description": "Bla bla bla description for this step",
+    "title": "Select from 1 to 2 options",
+    "description": "On this step you can select few options to move forward",
     "minimumAmountOfOptionsSelected": 1,
     "maximumAmountOfOptionsSelected": 2,
     "options": [
@@ -105,8 +105,8 @@
   {
     "id": "number_request_step",
     "stepType": "request",
-    "title": "Number request title",
-    "description": "Bla bla bla description for this step",
+    "title": "What is your age?",
+    "description": "Enter your age. If you are younger than 18, you can't move forward",
     "hint": "Your age",
     "type": "numberInt",
     "buttonsAlignment": "horizontal",
@@ -129,19 +129,13 @@
           "value": 56
         }
       ]
-    },
-    "secondaryButton": {
-      "action": "action:skip",
-      "text": "Skip",
-      "style": "text",
-      "type": "secondary"
     }
   },
   {
     "id": "text_request_step",
     "stepType": "request",
-    "title": "Text request title",
-    "description": "Bla bla bla description for this step",
+    "title": "What is your name?",
+    "description": "Enter your name to the text field to move forward",
     "hint": "Your name",
     "type": "text",
     "buttonsAlignment": "horizontal",
@@ -159,8 +153,8 @@
   {
     "id": "date_request_step",
     "stepType": "dateRequest",
-    "title": "Date request title",
-    "description": "Bla bla bla description for this step",
+    "title": "What is your birth day?",
+    "description": "Select your birth date to move forward",
     "hint": "Your date of birth",
     "type": "date",
     "primaryButton": {
@@ -171,9 +165,9 @@
   {
     "id": "time_request_step",
     "stepType": "dateRequest",
-    "title": "Time request title",
-    "description": "Bla bla bla description for this step",
-    "hint": "Your time of birth",
+    "title": "When you want to have a meeting?",
+    "description": "Select time that is good for you to have a video call",
+    "hint": "Meeting time",
     "type": "time",
     "primaryButton": {
       "action": "action:next",
@@ -183,9 +177,9 @@
   {
     "id": "date_and_time_request_step",
     "stepType": "dateRequest",
-    "title": "Date and time request title",
-    "description": "Bla bla bla description for this step",
-    "hint": "Your date and time of birth",
+    "title": "When you want to have a meeting?",
+    "description": "Select date and time that is good for you to have a video call",
+    "hint": "Meeting date and time",
     "type": "dateAndTime",
     "primaryButton": {
       "action": "action:next",

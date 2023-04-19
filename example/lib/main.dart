@@ -253,8 +253,8 @@ class MyApp extends StatelessWidget {
 
 class Mocks {
   static const InformationStep informationStep = InformationStep(
-    title: 'Information title',
-    description: 'Bla bla bla description for this step',
+    title: 'Let`s have a little survey',
+    description: 'Answer or skip questions, in the end your answers would be submitted',
     image: StepImage.svg(
       'https://www.svgrepo.com/show/24762/round-done-button.svg',
       source: StepImageSource.network,
@@ -267,8 +267,8 @@ class Mocks {
   );
 
   static const InformationStep informationStepWithImage = InformationStep(
-    title: 'Information title',
-    description: 'Bla bla bla description for this step',
+    title: 'Let`s have a little survey',
+    description: 'Answer or skip questions, in the end your answers would be submitted',
     image: StepImage.image(
       'https://icon-library.com/images/completed-icon/completed-icon-28.jpg',
       source: StepImageSource.network,
@@ -278,8 +278,8 @@ class Mocks {
   );
 
   static const InformationStep informationStepWithLottie = InformationStep(
-    title: 'Information title',
-    description: 'Bla bla bla description for this step',
+    title: 'Let`s have a little survey',
+    description: 'Answer or skip questions, in the end your answers would be submitted',
     image: StepImage.lottie(
       'assets/lottie/task-completed.json',
       source: StepImageSource.local,
@@ -289,8 +289,8 @@ class Mocks {
   );
 
   static const SingleSelectStep singleSelect = SingleSelectStep(
-    title: 'Select one option to move forward',
-    description: 'Bla bla bla description for this step',
+    title: 'Select one option',
+    description: 'On this step you can select single answer to move forward',
     options: [
       SelectOption(
         text: 'Custom navigation option',
@@ -322,8 +322,8 @@ class Mocks {
   );
 
   static const MultiSelectStep multiSelect = MultiSelectStep(
-    title: 'Select from 1 to 2 options to move forward',
-    description: 'Bla bla bla description for this step',
+    title: 'Select from 1 to 2 options',
+    description: 'On this step you can select few options to move forward',
     minimumAmountOfOptionsSelected: 1,
     maximumAmountOfOptionsSelected: 2,
     options: [
@@ -351,8 +351,8 @@ class Mocks {
 
   static const NumberRequestStep numberRequestStep = NumberRequestStep(
     id: 'number_request_step',
-    title: 'Number request title',
-    description: 'Bla bla bla description for this step',
+    title: 'What is your age?',
+    description: 'Enter your age. If you are younger than 18, you can`t move forward',
     hint: 'Your age',
     primaryButton: StepButton.next(
       predicate: ButtonPredicate.moreThan(18),
@@ -361,32 +361,31 @@ class Mocks {
   );
 
   static const TextRequestStep textRequestStep = TextRequestStep(
-    title: 'Text request title',
-    description: 'Bla bla bla description for this step',
+    title: 'What is your name?',
+    description: 'Enter your name to the text field to move forward',
     hint: 'Your name',
     primaryButton: StepButton.next(),
-    secondaryButton: StepButton.skip(),
   );
 
   static const DateRequestStep dateRequestStep = DateRequestStep(
-    title: 'Date request title',
-    description: 'Bla bla bla description for this step',
+    title: 'What is your birth day?',
+    description: 'Select your birth date to move forward',
     hint: 'Your date of birth',
     primaryButton: StepButton.next(),
   );
 
   static const DateRequestStep timeRequestStep = DateRequestStep(
-    title: 'Time request title',
-    description: 'Bla bla bla description for this step',
-    hint: 'Your time of birth',
+    title: 'When you want to have a meeting?',
+    description: 'Select time that is good for you to have a video call',
+    hint: 'Meeting time',
     type: RequestType.time,
     primaryButton: StepButton.next(),
   );
 
   static const DateRequestStep dateAndTimeRequestStep = DateRequestStep(
-    title: 'Date and time request title',
-    description: 'Bla bla bla description for this step',
-    hint: 'Your date and time of birth',
+    title: 'When you want to have a meeting?',
+    description: 'Select date and time that is good for you to have a video call',
+    hint: 'Meeting date and time',
     type: RequestType.dateAndTime,
     primaryButton: StepButton.next(),
   );

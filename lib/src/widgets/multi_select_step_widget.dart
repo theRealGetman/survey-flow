@@ -83,11 +83,7 @@ class _MultiSelectStepWidgetState extends State<MultiSelectStepWidget> {
           SizedBox(
             height: SurveyFlowTheme.of(context).theme.dimens.optionItemsMargin,
           ),
-          StepButtonWidget(
-            stepButton: step.primaryButton,
-            enabled: minimumItemsSelected,
-            onPressed: _onPressed,
-          ),
+          _button(context),
         ],
       ),
     );
@@ -143,5 +139,30 @@ class _MultiSelectStepWidgetState extends State<MultiSelectStepWidget> {
         );
       },
     );
+  }
+
+  Widget _button(BuildContext context) {
+    final bool fullWidth =
+        SurveyFlowTheme.of(context).theme.buttonStyles.buttonWidth ==
+            SFButtonWidth.full;
+    if (fullWidth) {
+      return Row(
+        children: [
+          Expanded(
+            child: StepButtonWidget(
+              stepButton: step.primaryButton,
+              enabled: minimumItemsSelected,
+              onPressed: _onPressed,
+            ),
+          ),
+        ],
+      );
+    } else {
+      return StepButtonWidget(
+        stepButton: step.primaryButton,
+        enabled: minimumItemsSelected,
+        onPressed: _onPressed,
+      );
+    }
   }
 }
